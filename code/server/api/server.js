@@ -4,7 +4,9 @@ const colors = require("colors"); // import colors
 const { errorHandler } = require("./middleware/errorMiddleware"); // custom error handler
 const port = process.env.PORT || 6000; // set our port
 const app = express();
+const connectDB = require("./config/db"); // import db connection
 
+connectDB(); // connect to db
 
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: false })); // Parse URL-encoded bodies 
