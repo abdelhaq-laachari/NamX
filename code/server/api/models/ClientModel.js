@@ -29,7 +29,8 @@ const clientSchema=mongoose.Schema({
     password:{
         type:String,
         required:[true,"Please enter your password"]
-    }
+    },
+    
 
 })
 
