@@ -12,6 +12,8 @@ const getCars = asyncHandler(async (req, res) =>
     res.status(200).json(cars)
 })
 
+
+
 // @desc    Add a new car
 // @route   POST /api/cars
 // @access  Private
