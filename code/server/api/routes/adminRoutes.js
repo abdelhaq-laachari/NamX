@@ -5,7 +5,6 @@ const { getAdmin, register } = require("../controller/adminController")
 
 // post admin 
 router.route('/register').post(register);
-
 router.route("/getAdmin/:id").get(getAdmin);
 
 
