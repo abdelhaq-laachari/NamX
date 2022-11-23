@@ -8,6 +8,7 @@ router.route("/update/:id").put(updateAdmin);
 
 router.route("/getAdmin/:id").get(getAdmin);
 
+// add route for car crud
 router.route("/getCars").get(getCars);
 router.route("/addCars").post(addCars);
 router.route("/updateCar/:id").put(updateCar);
