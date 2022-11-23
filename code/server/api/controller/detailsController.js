@@ -46,8 +46,8 @@ const updateDetail = asyncHandler(async (req, res) => {
   res.status(200).json(updatedDetail);
 });
 
-// @desc    Delete a car
-// @route   DELETE /api/cars/:id
+// @desc    Delete a detail
+// @route   DELETE admin/detail/:id
 // @access  Private
 const deleteDetail = asyncHandler(async (req, res) => {
   const detailId = req.params.id;
