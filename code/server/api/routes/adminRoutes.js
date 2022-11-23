@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { getAdmin, register } = require("../controller/adminController")
+const { getAdmin } = require("../controller/adminController")
 
 
-// post admin 
-router.route('/register').post(register);
 
 router.route("/getAdmin/:id").get(getAdmin);
 
