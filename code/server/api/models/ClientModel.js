@@ -26,12 +26,12 @@ const clientSchema=mongoose.Schema({
         required:[true,"Please enter your email"],
         unique:true
     },
-    password:{
-        type:String,
-        required:[true,"Please enter your password"]
-    },
     
 
-})
+},
+{
+    timestamp: true,
+  }
+  )
 
 module.exports=mongoose.model("Client",clientSchema)

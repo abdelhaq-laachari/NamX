@@ -12,5 +12,9 @@ const detailsSchema=mongoose.Schema({
          type:mongoose.Schema.Types.ObjectId,
          ref:"Car",
    }
-})
+},
+{
+    timestamp: true,
+  }
+  )
 module.exports=mongoose.model("Details",detailsSchema)
