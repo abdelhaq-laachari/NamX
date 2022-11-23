@@ -40,7 +40,7 @@ const updateCar = asyncHandler(async (req, res) =>
 {
     const car = await Car.findById(req.params.id)
 
-    
+
     if (!car)
     {
         res.status(400)
@@ -59,6 +59,8 @@ const updateCar = asyncHandler(async (req, res) =>
 // @access  Private
 const deleteCar = asyncHandler(async (req, res) =>
 {
+
+    
     const car = await Car.findById(req.params.id)
 
     if (!car)
