@@ -13,7 +13,6 @@ const getCars = asyncHandler(async (req, res) =>
 })
 
 
-
 // @desc    Add a new car
 // @route   POST /api/cars
 // @access  Private
@@ -24,6 +23,7 @@ const addCars = asyncHandler(async (req, res) =>
         res.status(400)
         throw new Error('Please add a text field')
     }
+    
 
     const car = await Car.create({
         model: req.body.model,
