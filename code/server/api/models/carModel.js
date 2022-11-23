@@ -6,4 +6,4 @@ const carSchema = mongoose.Schema({
     required: [true, "Please enter your value"],
   },
 });
-module.exports = mongoose.model("Car", carSchema);
+module.exports = mongoose.model("Car", carSchema); 
