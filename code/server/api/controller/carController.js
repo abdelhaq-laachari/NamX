@@ -23,7 +23,7 @@ const addCars = asyncHandler(async (req, res) =>
         res.status(400)
         throw new Error('Please add a text field')
     }
-    
+
 
     const car = await Car.create({
         model: req.body.model,
@@ -40,6 +40,7 @@ const updateCar = asyncHandler(async (req, res) =>
 {
     const car = await Car.findById(req.params.id)
 
+    
     if (!car)
     {
         res.status(400)
