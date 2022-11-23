@@ -6,7 +6,6 @@ const Car = require("../models/carModel");
 // @access  Private
 const getCars = asyncHandler(async (req, res) => {
   const cars = await Car.find();
-
   res.status(200).json(cars);
 });
 
@@ -14,7 +13,8 @@ const getCars = asyncHandler(async (req, res) => {
 // @route   POST /api/cars
 // @access  Private
 const addCars = asyncHandler(async (req, res) => {
-  if (!req.body.model) {
+  const model = req.body
+  if (!model) {
     res.status(400);
     throw new Error("Please add a text field");
   }

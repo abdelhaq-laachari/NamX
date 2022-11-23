@@ -8,7 +8,7 @@ const detailsSchema = mongoose.Schema({
     type: String,
     required: [true, "Please enter your value"],
   },
-  idCar: {
+  car: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Car",
   },
