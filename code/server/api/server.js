@@ -8,12 +8,11 @@ const connectDB = require("./config/db"); // import db connection
 
 connectDB(); // connect to db
 
-app.use(express.json()); // Parse JSON bodies
-app.use(express.urlencoded({ extended: false })); // Parse URL-encoded bodies 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.use("/user", require("./routes/userRoutes")); // use userRoutes
-app.use("/admin", require("./routes/adminRoutes")); // use adminRoutes
-app.use(errorHandler); // Error handler
+app.use('/api/admin', require('./routes/adminRoutes'));
 
 
-app.listen(port, () => console.log(`Server running on port : ${port}`)); // start the server
+app.use(errorHandler)
+app.listen(port, () => console.log(`Server started on port ${port}`));
