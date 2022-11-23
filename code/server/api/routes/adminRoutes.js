@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { updateAdmin, getAdmin } = require("../controller/adminController");
 const { getCars, addCars, updateCar, deleteCar } = require("../controller/carController");
-const { getDetails, addDetails, updateDetail } = require("../controller/detailsController");
+const { getDetails, addDetails, updateDetail, deleteDetail } = require("../controller/detailsController");
 
 
 router.route("/update/:id").put(updateAdmin);
@@ -19,5 +19,6 @@ router.route("/deleteCar/:id").delete(deleteCar);
 router.route("/getDetails").get(getDetails)
 router.route("/addDetails").post(addDetails)
 router.route("/updateDetail/:id").put(updateDetail)
+router.route("/deleteDetail/:id").delete(deleteDetail)
 
 module.exports = router;
