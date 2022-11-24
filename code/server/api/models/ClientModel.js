@@ -30,10 +30,11 @@ const clientSchema = mongoose.Schema({
     type: String,
     required: [true, "Please enter your password"],
   },
-    // role: {
-    // type: String,
-    // default: "client",
-    // },
-});
+   
+},
+{
+  timestamp: true,
+}
+);
 
 module.exports = mongoose.model("Client", clientSchema);

@@ -1,6 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const { updateAdmin, getAdmin } = require("../controller/adminController");
+const { 
+    updateAdmin,
+    getAdmin,
+    authAdmin,
+    registerAdmin,
+ } = require("../controller/adminController");
+// /api/admin/login
+router.route("/login").post(authAdmin);
+
+router.route("/registerAdmin").post(registerAdmin);
 
 router.route("/update/:id").put(updateAdmin);
 
