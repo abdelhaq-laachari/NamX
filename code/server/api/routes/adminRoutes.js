@@ -4,12 +4,12 @@ const router = express.Router();
 const { updateAdmin, getAdmin, registerAdmin, authAdmin } = require("../controller/adminController");
 const { getCars, addCars, updateCar, deleteCar } = require("../controller/carController");
 const { getDetails, addDetails, updateDetail, deleteDetail } = require("../controller/detailsController");
-//  ajouter protect
+//  Protect all routes
 const { protect } = require("../middleware/authMiddleware");
-// /api/admin/login
+
+
+// admin routes
 router.route("/login").post(authAdmin);
-
-
 router.route("/registerAdmin").post(registerAdmin);
 router.put("/update/:id",protect,updateAdmin)
 router.get("/getAdmin/:id",protect,getAdmin)
