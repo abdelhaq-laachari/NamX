@@ -34,6 +34,8 @@ const registerAdmin = asyncHandler(async (req, res) => {
     lastName,
     email,
     password: hashedPassword,
+    token: generateToken(),
+    
   });
 
   //   if admin created send success message
@@ -43,7 +45,7 @@ const registerAdmin = asyncHandler(async (req, res) => {
       firstName: admin.firstName,
       lastName: admin.lastName,
       email: admin.email,
-      // token: generateToken(admin._id),
+      token: generateToken(admin._id),
     });
   } else {
     res.status(400);
@@ -73,7 +75,7 @@ const authAdmin = asyncHandler(async (req, res) => {
       firstName: admin.firstName,
       lastName: admin.lastName,
       email: admin.email,
-
+      token: generateToken(admin._id),
     });
   } else {
     res.status(401);
@@ -106,6 +108,12 @@ const updateAdmin = asyncHandler(async (req, res) => {
   res.status(200).json(updateProfile);
 });
 
+// Geberate JWT
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
+};
 module.exports = {
   updateAdmin,
   getAdmin,
