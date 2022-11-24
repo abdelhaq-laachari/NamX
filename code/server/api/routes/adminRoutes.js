@@ -16,15 +16,16 @@ router.get("/getAdmin/:id",protect,getAdmin)
 
 
 // add route for car crud
-router.route("/getCars").get(getCars);
-router.route("/addCars").post(addCars);
-router.route("/updateCar/:id").put(updateCar);
-router.route("/deleteCar/:id").delete(deleteCar);
+
+router.get("/getCars",protect,getCars);
+router.post("/addCars",protect,addCars);
+router.put("/updateCar/:id",protect,updateCar);
+router.delete("/deleteCar/:id",protect,deleteCar);
 
 // Create route for details crud
-router.route("/getDetails").get(getDetails)
-router.route("/addDetails").post(addDetails)
-router.route("/updateDetail/:id").put(updateDetail)
-router.route("/deleteDetail/:id").delete(deleteDetail)
+router.get("/getDetails",protect,getDetails);
+router.post("/addDetails",protect,addDetails);
+router.put("/updateDetail/:id",protect,updateDetail);
+router.delete("/deleteDetail/:id",protect,deleteDetail)
 
 module.exports = router;
