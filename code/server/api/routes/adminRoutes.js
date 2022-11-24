@@ -1,31 +1,52 @@
 const express = require("express");
 const router = express.Router();
 
-const { updateAdmin, getAdmin, registerAdmin, authAdmin } = require("../controller/adminController");
-const { getCars, addCars, updateCar, deleteCar } = require("../controller/carController");
-const { getDetails, addDetails, updateDetail, deleteDetail } = require("../controller/detailsController");
+// get function from admin controller
+const {
+  updateAdmin,
+  getAdmin,
+  registerAdmin,
+  authAdmin,
+} = require("../controller/adminController");
+
+// get function from car controller
+const {
+  getCars,
+  addCars,
+  updateCar,
+  deleteCar,
+} = require("../controller/carController");
+
+// get function from details controller
+const {
+  getDetails,
+  addDetails,
+  updateDetail,
+  deleteDetail,
+} = require("../controller/detailsController");
+
+
 //  Protect all routes
 const { protect } = require("../middleware/authMiddleware");
-
 
 // admin routes
 router.route("/login").post(authAdmin);
 router.route("/registerAdmin").post(registerAdmin);
-router.put("/update/:id",protect,updateAdmin)
-router.get("/getAdmin/:id",protect,getAdmin)
-
+router.route("/update/:id").put(protect, updateAdmin);
+router.route("/getAdmin/:id").get(protect, getAdmin);
 
 // add route for car crud
 
-router.get("/getCars",protect,getCars);
-router.post("/addCars",protect,addCars);
-router.put("/updateCar/:id",protect,updateCar);
-router.delete("/deleteCar/:id",protect,deleteCar);
+router.route("/getCars").get(protect, getCars);
+router.route("/addCars").post(protect, addCars);
+router.route("/updateCar/:id").put(protect, updateCar);
+router.route("/deleteCar/:id").delete(protect, deleteCar);
 
 // Create route for details crud
-router.get("/getDetails",protect,getDetails);
-router.post("/addDetails",protect,addDetails);
-router.put("/updateDetail/:id",protect,updateDetail);
-router.delete("/deleteDetail/:id",protect,deleteDetail)
+router.route("/getDetails").get(protect, getDetails);
+router.route("/addDetails").post(protect, addDetails);
+router.route("/updateDetail/:id").put(protect, updateDetail);
+router.route("/deleteDetail/:id").delete(protect, deleteDetail);
 
+// export route file
 module.exports = router;
