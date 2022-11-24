@@ -6,13 +6,16 @@ const {
     authAdmin,
     registerAdmin,
  } = require("../controller/adminController");
+//  ajouter protect
+const { protect } = require("../middleware/authMiddleware");
 // /api/admin/login
 router.route("/login").post(authAdmin);
 
 router.route("/registerAdmin").post(registerAdmin);
 
-router.route("/update/:id").put(updateAdmin);
+router.put("/update/:id",protect,updateAdmin)
 
-router.route("/getAdmin/:id").get(getAdmin);
+router.get("/getAdmin/:id",protect,getAdmin)
+
 
 module.exports = router;
