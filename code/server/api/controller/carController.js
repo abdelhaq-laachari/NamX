@@ -12,7 +12,6 @@ const getCars = asyncHandler(async (req, res) =>
     res.status(200).json(cars)
 })
 
-
 // @desc    Add a new car
 // @route   POST /api/cars
 // @access  Private
@@ -60,7 +59,7 @@ const updateCar = asyncHandler(async (req, res) =>
 const deleteCar = asyncHandler(async (req, res) =>
 {
 
-    
+
     const car = await Car.findById(req.params.id)
 
     if (!car)
