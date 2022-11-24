@@ -9,13 +9,9 @@ const preOrderSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Admin",
     },
-    // idCar: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Car",
-    // },
-    date: {
-      type: String,
-      default: Date.now,
+    idCar: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Car",
     },
     amount: {
       type: Number,
@@ -27,4 +23,3 @@ const preOrderSchema = mongoose.Schema(
   }
 );
 module.exports = mongoose.model("PreOrder", preOrderSchema);
-
