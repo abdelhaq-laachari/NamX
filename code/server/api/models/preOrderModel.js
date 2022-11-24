@@ -10,29 +10,8 @@ const preOrderSchema = mongoose.Schema(
       ref: "Admin",
     },
     idCar: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Car",
-    },
-    date: {
-<<<<<<< HEAD
-        type: String,
-        required: [true, "Please enter your date"]
-    },
-    status:{
-        type:Boolean,
-        default:false
-    },
-
-
-    },
-    {
-        timestamp: true,
-      }
-      )
-module.exports = mongoose.model("PreOrder", preOrderSchema)
-=======
-      type: String,
-      default: Date.now,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Car",
     },
     amount: {
       type: Number,
@@ -44,5 +23,3 @@ module.exports = mongoose.model("PreOrder", preOrderSchema)
   }
 );
 module.exports = mongoose.model("PreOrder", preOrderSchema);
-
->>>>>>> 308672995f68c8dd53c00836e8fb84fef04019a4
