@@ -23,9 +23,9 @@ router.put("/updateCar/:id",protect,updateCar);
 router.delete("/deleteCar/:id",protect,deleteCar);
 
 // Create route for details crud
-router.route("/getDetails").get(getDetails)
-router.route("/addDetails").post(addDetails)
-router.route("/updateDetail/:id").put(updateDetail)
-router.route("/deleteDetail/:id").delete(deleteDetail)
+router.get("/getDetails",protect,getDetails);
+router.post("/addDetails",protect,addDetails);
+router.put("/updateDetail/:id",protect,updateDetail);
+router.delete("/deleteDetail/:id",protect,deleteDetail)
 
 module.exports = router;
