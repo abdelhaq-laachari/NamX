@@ -57,12 +57,7 @@ const registerAdmin = asyncHandler(async (req, res) => {
 // @route   POST /api/admin/login
 // @access  Public
 const authAdmin = asyncHandler(async (req, res) => {
-  // {
-  //   "firstName": "ADMIN",
-  //   "lastName": "NETWORK",
-  //   "email": "admin@gmail.com",
-  //   "password": "admin1234"
-  // }
+
 
   // res.json({message:'Login Admin'})
 

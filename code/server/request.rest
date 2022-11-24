@@ -1,0 +1,22 @@
+###
+# login
+http://localhost:6000/api/admin/login
+Content-Type: application/json
+{
+    "email": "admin@gmail.com",
+    "password": "admin1234"
+    
+}
+
+###
+# Register Admin
+http://localhost:6000/api/admin/registerAdmin
+Content-Type: application/json
+{
+     
+     "firstName": "ADMIN",
+     "lastName": "admin",
+    "email": "admin@gmail.com",
+    "password": "admin1234"
+  
+}
