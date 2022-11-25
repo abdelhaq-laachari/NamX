@@ -11,6 +11,7 @@ import { useContext } from "react";
 import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
+import Avatar from "../avatar/Avatar";
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
@@ -49,20 +50,7 @@ const Navbar = () => {
               </StyledBadge>
             </IconButton>
           </div>
-          {/* <div className="item">
-            <ChatBubbleOutlineOutlinedIcon className="icon" />
-            <div className="counter">2</div>
-          </div> */}
-          <div className="item">
-            <ListOutlinedIcon className="icon" />
-          </div>
-          <div className="item">
-            <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-              className="avatar"
-            />
-          </div>
+          <Avatar />
         </div>
       </div>
     </div>
