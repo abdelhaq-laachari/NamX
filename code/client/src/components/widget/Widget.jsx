@@ -4,6 +4,8 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+// import lockoutlinedicon from '@mui/icons-material/lockoutlined'
+import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
 
 const Widget = ({ type }) => {
   let data;
@@ -45,13 +47,13 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "earning":
+    case "cars":
       data = {
-        title: "EARNINGS",
+        title: "CARS",
         isMoney: true,
-        link: "View net earnings",
+        link: "View all cars",
         icon: (
-          <MonetizationOnOutlinedIcon
+          <TimeToLeaveIcon
             className="icon"
             style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
           />
