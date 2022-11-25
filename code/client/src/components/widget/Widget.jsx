@@ -4,7 +4,6 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-// import lockoutlinedicon from '@mui/icons-material/lockoutlined'
 import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
 
 const Widget = ({ type }) => {
@@ -50,7 +49,7 @@ const Widget = ({ type }) => {
     case "cars":
       data = {
         title: "CARS",
-        isMoney: true,
+        isMoney: false,
         link: "View all cars",
         icon: (
           <TimeToLeaveIcon
