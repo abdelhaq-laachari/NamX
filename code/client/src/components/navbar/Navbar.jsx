@@ -8,9 +8,22 @@ import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutline
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
+import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import Avatar from "../avatar/Avatar";
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
+
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      right: -3,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: "0 4px",
+    },
+  }));
 
   return (
     <div className="navbar">
@@ -31,26 +44,13 @@ const Navbar = () => {
             />
           </div>
           <div className="item">
-            <FullscreenExitOutlinedIcon className="icon" />
+            <IconButton aria-label="cart">
+              <StyledBadge badgeContent={1} color="secondary">
+                <NotificationsNoneOutlinedIcon className="icon" />
+              </StyledBadge>
+            </IconButton>
           </div>
-          <div className="item">
-            <NotificationsNoneOutlinedIcon className="icon" />
-            <div className="counter">1</div>
-          </div>
-          <div className="item">
-            <ChatBubbleOutlineOutlinedIcon className="icon" />
-            <div className="counter">2</div>
-          </div>
-          <div className="item">
-            <ListOutlinedIcon className="icon" />
-          </div>
-          <div className="item">
-            <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-              className="avatar"
-            />
-          </div>
+          <Avatar />
         </div>
       </div>
     </div>
