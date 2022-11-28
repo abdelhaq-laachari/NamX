@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const preOrderSchema = mongoose.Schema(
+const OrderSchema = mongoose.Schema(
   {
     idClient: {
       type: mongoose.Schema.Types.ObjectId,
@@ -22,4 +22,4 @@ const preOrderSchema = mongoose.Schema(
     timestamp: true,
   }
 );
-module.exports = mongoose.model("PreOrder", preOrderSchema);
+module.exports = mongoose.model("Order", OrderSchema);
