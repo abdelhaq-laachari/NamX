@@ -58,8 +58,6 @@ const registerAdmin = asyncHandler(async (req, res) => {
 // @route   POST /api/admin/login
 // @access  Public
 const authAdmin = asyncHandler(async (req, res) => {
-
-
   // res.json({message:'Login Admin'})
 
   const { email, password } = req.body;
@@ -78,6 +76,7 @@ const authAdmin = asyncHandler(async (req, res) => {
     throw new Error("Invalid email or password");
   }
 });
+
 // @desc    Get admin information
 // @route   GET /admin/getAdmin/:id
 // @access  Private
