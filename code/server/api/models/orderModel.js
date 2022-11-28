@@ -5,10 +5,6 @@ const OrderSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Client",
     },
-    idAdmin: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Admin",
-    },
     idCar: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Car",
