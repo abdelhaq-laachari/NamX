@@ -1,20 +1,35 @@
 const asyncHandler = require("express-async-handler");
 const Order = require("../models/orderModel");
 const Client = require("../models/clientModel");
+const nodemailer = require("nodemailer");
+
+const sendMail = async (email) => {
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: "frederick.krajcik@ethereal.email", // generated ethereal user
+      pass: "XSMnjpAXehdgQef2B2", // generated ethereal password
+    },
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: "abdelhaq@email.com",
+    to: email,
+    subject: "New Order from NamX",
+    text: "your order has been sent to admin",
+  });
+};
 
 // @desc    Create new order by client
 // @route   POST /newOrder
 // @access  Public
 const newOrder = asyncHandler(async (req, res) => {
-  const {
-    fullName,
-    address,
-    city,
-    phoneNumber,
-    email,
-    quantity,
-    idCar,
-  } = req.body;
+  const { fullName, address, city, phoneNumber, email, quantity, idCar } =
+    req.body;
 
   if (
     !fullName ||
@@ -23,7 +38,7 @@ const newOrder = asyncHandler(async (req, res) => {
     !phoneNumber ||
     !email ||
     !quantity ||
-    !idCar 
+    !idCar
   ) {
     res.status(400);
     throw new Error("Please fill in all fields");
@@ -36,7 +51,6 @@ const newOrder = asyncHandler(async (req, res) => {
     phoneNumber,
     email,
   });
-  // const id = client._id
   if (client) {
     const order = await Order.create({
       quantity,
@@ -44,10 +58,12 @@ const newOrder = asyncHandler(async (req, res) => {
       idClient: client._id,
       idCar,
     });
-    if (!order) {
+    if (order) {
+      sendMail(email)
+      res.status(201).send({ message: "  your order was send to admin" });
+    } else {
       throw new Error("something went wrong");
     }
-    res.status(201).send({ message: "  your order was send to admin" });
   }
   if (!client) {
     throw new Error("something went wrong with client function");
