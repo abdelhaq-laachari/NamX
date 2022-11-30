@@ -9,9 +9,13 @@ const OrderSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Car",
     },
-    amount: {
+    quantity: {
       type: Number,
       required: [true, "Please enter your amount"],
+    },
+    status: {
+      type: String,
+      required: [true, "Please enter status"],
     },
   },
   {
