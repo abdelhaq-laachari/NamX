@@ -3,26 +3,25 @@ const Order = require("../models/orderModel");
 const Client = require("../models/clientModel");
 const nodemailer = require("nodemailer");
 
-const sendMail = async (email) => {
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, // true for 465, false for other ports
+const sendEmail = (email) =>{
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
     auth: {
-      user: "frederick.krajcik@ethereal.email", // generated ethereal user
-      pass: "XSMnjpAXehdgQef2B2", // generated ethereal password
-    },
+      user: 'abdonani772@gmail.com',
+      pass: 'psimwlooqhddcdud'
+    }
   });
-
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
-    from: "abdelhaq@email.com",
+  
+  const mailOptions = {
+    from: 'e.gabdelhaq@gmail.com',
     to: email,
-    subject: "New Order from NamX",
-    text: "your order has been sent to admin",
-  });
-};
+    subject: 'namX',
+    text: 'Email content sssss'
+  };
+  transporter.sendMail(mailOptions)
+}
+
+// const 
 
 // @desc    Create new order by client
 // @route   POST /newOrder
@@ -59,7 +58,7 @@ const newOrder = asyncHandler(async (req, res) => {
       idCar,
     });
     if (order) {
-      sendMail(email)
+      sendEmail(email)
       res.status(201).send({ message: "  your order was send to admin" });
     } else {
       throw new Error("something went wrong");
