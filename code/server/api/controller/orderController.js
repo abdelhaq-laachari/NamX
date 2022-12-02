@@ -1,30 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Order = require("../models/orderModel");
 const Client = require("../models/clientModel");
-const nodemailer = require("nodemailer");
-
-const sendEmail = (email) => {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "abdonani772@gmail.com",
-      pass: "psimwlooqhddcdud",
-    },
-  });
-
-  const mailOptions = {
-    from: "e.gabdelhaq@gmail.com",
-    to: email,
-    subject: "namX",
-    // email template here
-    html: `<h1>namX</h1>
-    <p>Thank you for your order</p>
-    <p>we will contact you soon</p>`,
-  };
-  transporter.sendMail(mailOptions);
-};
-
-// const
+const helper = require('../template/controller/email')
 
 // @desc    Create new order by client
 // @route   POST /newOrder
@@ -32,6 +9,8 @@ const sendEmail = (email) => {
 const newOrder = asyncHandler(async (req, res) => {
   const { fullName, address, city, phoneNumber, email, quantity, idCar } =
     req.body;
+
+  const firstName = fullName.split(" ")[0];
 
   if (
     !fullName ||
@@ -61,7 +40,7 @@ const newOrder = asyncHandler(async (req, res) => {
       idCar,
     });
     if (order) {
-      sendEmail(email);
+      helper.sendMails(email, firstName);
       res.status(201).send({ message: "  your order was send to admin" });
     } else {
       throw new Error("something went wrong");
