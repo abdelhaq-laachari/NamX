@@ -12,6 +12,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
+import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -33,16 +36,33 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const formData = {
-      email: data.get("email"),
-      password: data.get("password"),
-    };
-    console.log(formData)
-  };
+const Login = () => {
+  
+    const [credentials, setCredentials] = useState({
+        email: '',
+        password: ''
+    })
+    
+    // Gestion de la modification des champs du formulaire
+    const onChange = (e) => {
+        setCredentials({
+            ...credentials,
+          [e.target.name]: e.target.value
+        
+        })
+  }
+  console.log(credentials);
+
+    // Soumission du formulaire
+    const onSubmit = (e) => {
+      e.preventDefault()
+       axios.post("http://localhost:5000/admin/login", credentials)
+      .then(res => console.log(res))
+        .catch(err => console.log(err))
+      console.log(credentials);
+       
+    }
+    
 
   return (
     <ThemeProvider theme={theme}>
@@ -64,7 +84,7 @@ export default function SignIn() {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={onSubmit}
             noValidate
             sx={{ mt: 1 }}
           >
@@ -77,6 +97,7 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+               value={credentials.email} onChange={onChange}
             />
             <TextField
               margin="normal"
@@ -87,6 +108,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+               value={credentials.password} onChange={onChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -119,3 +141,4 @@ export default function SignIn() {
     </ThemeProvider>
   );
 }
+export default Login;
