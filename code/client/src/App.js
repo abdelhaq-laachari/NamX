@@ -9,6 +9,8 @@ import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -40,6 +42,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <ToastContainer position="top-right" autoClose={2000} />
     </div>
   );
 }
