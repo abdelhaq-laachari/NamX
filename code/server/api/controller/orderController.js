@@ -1,7 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const Order = require("../models/orderModel");
 const Client = require("../models/clientModel");
-const helper = require('../template/controller/email')
+const { sendMail } = require("emailsender-js");
+const authEmail = process.env.EMAIL;
+const authPassword = process.env.PASS;
 
 // @desc    Create new order by client
 // @route   POST /newOrder
@@ -40,7 +42,13 @@ const newOrder = asyncHandler(async (req, res) => {
       idCar,
     });
     if (order) {
-      helper.sendMails(email, firstName);
+      sendMail({
+        email,
+        subject: "Order Confirmation 2",
+        fullName: firstName,
+        authEmail,
+        authPassword,
+      });
       res.status(201).send({ message: "  your order was send to admin" });
     } else {
       throw new Error("something went wrong");
