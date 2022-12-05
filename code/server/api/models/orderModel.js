@@ -1,25 +1,25 @@
 const mongoose = require("mongoose");
-const preOrderSchema = mongoose.Schema(
+const OrderSchema = mongoose.Schema(
   {
     idClient: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Client",
     },
-    idAdmin: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Admin",
-    },
     idCar: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Car",
     },
-    amount: {
+    quantity: {
       type: Number,
       required: [true, "Please enter your amount"],
+    },
+    status: {
+      type: String,
+      required: [true, "Please enter status"],
     },
   },
   {
     timestamp: true,
   }
 );
-module.exports = mongoose.model("PreOrder", preOrderSchema);
+module.exports = mongoose.model("Order", OrderSchema);

@@ -2,19 +2,15 @@ const mongoose = require("mongoose");
 
 const clientSchema = mongoose.Schema(
   {
-    firstName: {
+    fullName: {
       type: String,
-      required: [true, "Please enter your first name"],
+      required: [true, "Please enter your full name"],
     },
-    lastName: {
-      type: String,
-      required: [true, "Please enter your last name"],
-    },
-    Address: {
+    address: {
       type: String,
       required: [true, "Please enter your Address"],
     },
-    City: {
+    city: {
       type: String,
       required: [true, "Please enter your City"],
     },
@@ -25,11 +21,6 @@ const clientSchema = mongoose.Schema(
     email: {
       type: String,
       required: [true, "Please enter your email"],
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: [true, "Please enter your password"],
     },
   },
   {

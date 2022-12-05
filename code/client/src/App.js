@@ -9,6 +9,7 @@ import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
+import Preorder from "./pages/preorder/Preorder";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -20,6 +21,7 @@ function App() {
           <Route path="/">
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
+            <Route path="preorder" element={< Preorder />} />
             <Route path="register" element={<Register />} />
             <Route path="users">
               <Route index element={<List />} />
