@@ -14,7 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -36,7 +36,9 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-const Login = () => {
+const Login = () =>
+{
+  let navigate = useNavigate();
   
     const [credentials, setCredentials] = useState({
         email: '',
@@ -57,9 +59,15 @@ const Login = () => {
     const onSubmit = (e) => {
       e.preventDefault()
        axios.post("http://localhost:5000/admin/login", credentials)
-      .then(res => console.log(res))
+         .then(res =>
+         {
+           console.log(res)
+            navigate("/")
+           
+         })
+           
         .catch(err => console.log(err))
-      console.log(credentials);
+     
        
     }
     
