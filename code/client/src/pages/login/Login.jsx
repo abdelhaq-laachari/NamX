@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -13,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function Copyright(props) {
   return (
@@ -35,6 +34,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const [formErrors, setFormErrors] = React.useState({});
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -48,14 +49,16 @@ export default function SignIn() {
     if (email && password) {
       try {
         const res = await axios.post("admin/login", formData);
-        console.log(res);
+        console.log(res.data);
+        window.location.href = "/";
       } catch (error) {
         console.log(error);
+        if (error.response.status === 401) {
+          toast.error(error.response.data.message);
+        }
       }
     }
   };
-
-  const [formErrors, setFormErrors] = React.useState({});
 
   const validate = (values) => {
     const errors = {};
@@ -129,10 +132,6 @@ export default function SignIn() {
                 {formErrors.password}
               </Typography>
             )}
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
