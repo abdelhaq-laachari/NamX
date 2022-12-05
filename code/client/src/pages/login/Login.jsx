@@ -38,22 +38,24 @@ export default function SignIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const email = data.get("email");
+    const password = data.get("password");
     const formData = {
-      email: data.get("email"),
-      password: data.get("password"),
+      email,
+      password,
     };
-    console.log(formData);
-
-    try {
-      const res = await axios.post(
-        "admin/login",
-        { email: "abdelhaq@email.com", password: "1234" },
-      );
-      console.log(res);
-    } catch (error) {
-      console.log(error);
+    setFormErrors(validate(formData));
+    if (email && password) {
+      try {
+        const res = await axios.post("admin/login", formData);
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
+
+  const [formErrors, setFormErrors] = React.useState({});
 
   const validate = (values) => {
     const errors = {};
@@ -98,6 +100,7 @@ export default function SignIn() {
             <TextField
               margin="normal"
               required
+              error={formErrors.email ? true : false}
               fullWidth
               id="email"
               label="Email Address"
@@ -105,9 +108,15 @@ export default function SignIn() {
               autoComplete="email"
               autoFocus
             />
+            {formErrors.email && (
+              <Typography variant="body2" color="error">
+                {formErrors.email}
+              </Typography>
+            )}
             <TextField
               margin="normal"
               required
+              error={formErrors.password ? true : false}
               fullWidth
               name="password"
               label="Password"
@@ -115,6 +124,11 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
+            {formErrors.password && (
+              <Typography variant="body2" color="error">
+                {formErrors.password}
+              </Typography>
+            )}
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
