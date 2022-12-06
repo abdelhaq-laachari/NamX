@@ -1,11 +1,11 @@
 import "./single.scss";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
+import Sidebar from "../sidebar/Sidebar";
+import Navbar from "../navbar/Navbar";
 import { Link } from "react-router-dom";
-import New from "../new/New";
+import New from "../../pages/new/New";
 import { userInputs } from "../../formSource";
 
-const Single = () => {
+const Single = ({ data }) => {
   return (
     <div className="single">
       <Sidebar />
@@ -30,24 +30,28 @@ const Single = () => {
                 className="itemImg"
               />
               <div className="details">
-                <h1 className="itemTitle">Jane Doe</h1>
-                <div className="detailItem">
+                <h1 className="itemTitle">{data?.firstName} {data?.lastName}</h1>
+                <div className="detailItem"> 
                   <span className="itemKey">Email:</span>
-                  <span className="itemValue">janedoe@gmail.com</span>
+                  <span className="itemValue">{data.email}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Phone:</span>
                   <span className="itemValue">+1 2345 67 89</span>
+                  {/* <span className="itemValue">{data.phone}</span> */}
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Address:</span>
                   <span className="itemValue">
                     Elton St. 234 Garden Yd. NewYork
                   </span>
+                  {/* <span className="itemValue">
+                    {data.address}
+                  </span> */}
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Country:</span>
-                  <span className="itemValue">USA</span>
+                  <span className="itemValue">Morocco</span>
                 </div>
               </div>
             </div>
