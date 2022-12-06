@@ -20,7 +20,7 @@ const newOrder = asyncHandler(async (req, res) => {
     !city ||
     !phoneNumber ||
     !email ||
-    !quantity ||
+    !quantity || 
     !idCar
   ) {
     res.status(400);
