@@ -11,7 +11,7 @@ const Cars = () => {
   // get data from database using axios
   useEffect(() => {
     axios
-      .get("admin/getClients", {
+      .get("admin/getCars", {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {

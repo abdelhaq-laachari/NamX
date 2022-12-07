@@ -49,6 +49,28 @@ export const userColumns = [
   },
 ];
 
+export const carColumns = [
+  { field: "_id", headerName: "ID", width: 170 },
+  // {
+  //   field: "car",
+  //   headerName: "Car",
+  //   width: 230,
+  //   renderCell: (params) => {
+  //     return (
+  //       <div className="cellWithImg">
+  //         {/* <img className="cellImg" src={params.row.img} alt="avatar" /> */}
+  //         {params.row.car}
+  //       </div>
+  //     );
+  //   },
+  // },
+  {
+    field: "model",
+    headerName: "Model",
+    width: 230,
+  }
+];
+
 //temporary data
 // export const userRows = [
 //   {

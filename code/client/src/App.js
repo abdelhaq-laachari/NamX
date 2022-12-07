@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Profile from "./pages/profile/Profile";
 import User from "./pages/single user/User";
 import Users from "./pages/all users/Users";
+import Cars from "./pages/cars/Cars";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -35,8 +36,8 @@ function App() {
                 element={<New inputs={userInputs} title="Add New User" />}
               />
             </Route>
-            <Route path="products">
-              <Route index element={<List />} />
+            <Route path="cars">
+              <Route index element={<Cars />} />
               <Route path=":productId" element={<Single />} />
               <Route
                 path="new"
