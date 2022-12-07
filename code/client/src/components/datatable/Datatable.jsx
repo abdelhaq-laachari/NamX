@@ -1,6 +1,6 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { carColumns, userColumns } from "../../datatablesource";
+import { carColumns, userColumns, orderColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -10,6 +10,26 @@ const Datatable = ({ data }) => {
   const handleDelete = (_id) => {
     data.filter((item) => item._id !== _id);
   };
+
+  // add switch statement to handle different paths
+ const switchFunction = () => {
+  switch (path) {
+    case "users":
+      return (
+        userColumns.concat(actionColumn)
+      );
+    case "cars":
+      return (
+        carColumns.concat(actionColumn)
+      );
+    case "orders":
+      return (
+        orderColumns.concat(actionColumn)
+      );
+    default:
+  }
+}
+      
 
   const actionColumn = [
     {
@@ -40,11 +60,12 @@ const Datatable = ({ data }) => {
         className="datagrid"
         getRowId={(row) => row._id}
         rows={data}
-        columns={
-          path === "users"
-            ? userColumns.concat(actionColumn)
-            : path === "cars" && carColumns.concat(actionColumn)
-        }
+        // columns={
+        //   path === "users"
+        //     ? userColumns.concat(actionColumn)
+        //     : path === "cars" && carColumns.concat(actionColumn)
+        // }
+        columns={switchFunction()}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection

@@ -71,6 +71,30 @@ export const carColumns = [
   }
 ];
 
+export const orderColumns = [
+  { field: "_id", headerName: "ID", width: 170 },
+  {
+    field: "quantity",
+    headerName: "Quantity",
+    width: 230,
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 230,
+  },
+  {
+    field: "idClient",
+    headerName: "Client",
+    width: 230,
+  },
+  {
+    field: "idCar",
+    headerName: "Car",
+    width: 230,
+  },
+];
+
 //temporary data
 // export const userRows = [
 //   {

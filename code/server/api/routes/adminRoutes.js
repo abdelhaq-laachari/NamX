@@ -29,7 +29,7 @@ const {
 } = require("../controller/detailsController");
 
 // get function from order controller
-const { newOrder } = require("../controller/orderController");
+const { newOrder, getOrders } = require("../controller/orderController");
 
 
 //  Protect all routes
@@ -57,9 +57,7 @@ router.route("/deleteDetail/:id").delete(protect, deleteDetail);
 
 // Create route for orders
 router.route("/newOrder").post(newOrder);
-// router.route("/addDetails").post(protect, addDetails);
-// router.route("/updateDetail/:id").put(protect, updateDetail);
-// router.route("/deleteDetail/:id").delete(protect, deleteDetail);
+router.route("/getOrders").get(protect, getOrders);
 
 // Create route for client
 router.route("/singleClient/:id").get(singleClient);

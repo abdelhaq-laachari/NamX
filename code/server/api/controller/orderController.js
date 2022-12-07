@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Order = require("../models/orderModel");
 const Client = require("../models/clientModel");
-const helper = require('../template/controller/email')
+const helper = require("../template/controller/email");
 
 // @desc    Create new order by client
 // @route   POST /newOrder
@@ -55,7 +55,9 @@ const newOrder = asyncHandler(async (req, res) => {
 // @route   GET /orders
 // @access  Private
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find();
+  const orders = await Order.find()
+    .populate("idClient", "fullName")
+    .populate("idCar", "model");
   res.status(200).json(orders);
 });
 
