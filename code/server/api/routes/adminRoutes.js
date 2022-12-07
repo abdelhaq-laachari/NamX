@@ -39,7 +39,7 @@ const { protect } = require("../middleware/authMiddleware");
 router.route("/login").post(authAdmin);
 router.route("/registerAdmin").post(registerAdmin);
 router.route("/update/:id").put(protect, updateAdmin);
-router.route("/getAdmin/:id").get(protect, getAdmin);
+router.route("/getAdmin").get(protect, getAdmin);
 
 // add route for car crud
 

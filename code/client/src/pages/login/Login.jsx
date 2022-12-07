@@ -50,6 +50,7 @@ export default function SignIn() {
       try {
         const res = await axios.post("admin/login", formData);
         console.log(res.data);
+        localStorage.setItem("accessToken", res.data.token);
         window.location.href = "/";
       } catch (error) {
         console.log(error);
