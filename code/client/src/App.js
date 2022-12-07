@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Profile from "./pages/profile/Profile";
 import User from "./pages/single user/User";
+import Users from "./pages/all users/Users";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -27,7 +28,7 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route path="profile" element={<Profile />} />
             <Route path="users">
-              <Route index element={<List />} />
+              <Route index element={<Users />} />
               <Route path=":userId" element={<User />} />
               <Route
                 path="new"

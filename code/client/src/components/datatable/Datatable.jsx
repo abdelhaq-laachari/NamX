@@ -1,15 +1,16 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../datatablesource";
+import { userColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const Datatable = () => {
-  const [data, setData] = useState(userRows);
+const Datatable = ({data}) => {
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+  const handleDelete = (_id) => {
+    data.filter((item) => item._id !== _id);
   };
+
 
   const actionColumn = [
     {
@@ -24,7 +25,7 @@ const Datatable = () => {
             </Link>
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             >
               Delete
             </div>
@@ -35,11 +36,10 @@ const Datatable = () => {
   ];
   return (
     <div className="datatable">
-      <div className="datatableTitle">
-        All New Users
-      </div>
+      <div className="datatableTitle">All New Users</div>
       <DataGrid
         className="datagrid"
+        getRowId={(row) => row._id}
         rows={data}
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
