@@ -18,7 +18,7 @@ const {
 } = require("../controller/carController");
 
 // get function from client controller
-const { createClient } = require("../controller/clientController");
+const { createClient, singleClient, getClients } = require("../controller/clientController");
 
 // get function from details controller
 const {
@@ -60,6 +60,10 @@ router.route("/newOrder").post(newOrder);
 // router.route("/addDetails").post(protect, addDetails);
 // router.route("/updateDetail/:id").put(protect, updateDetail);
 // router.route("/deleteDetail/:id").delete(protect, deleteDetail);
+
+// Create route for client
+router.route("/singleClient/:id").get(singleClient);
+router.route("/getClients").get(protect, getClients);
 
 // export route file
 module.exports = router;

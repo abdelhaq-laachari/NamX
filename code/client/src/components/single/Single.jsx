@@ -13,18 +13,9 @@ const Single = ({ data }) => {
       <Sidebar />
       <div className="singleContainer">
         <Navbar />
-        {path === "user" ? (
+        {path === "users" ? (
           <div className="top">
           <div className="left">
-            <div className="editButton">
-              <Link
-                to="/users/new"
-                style={{ textDecoration: "none" }}
-                element={<New inputs={userInputs} title="Add New User" />}
-              >
-                <span>Edit</span>
-              </Link>
-            </div>
             <h1 className="title">Information</h1>
             <div className="item">
               <img
@@ -63,6 +54,15 @@ const Single = ({ data }) => {
         ) : (
           <div className="top">
           <div className="left">
+            <div className="editButton">
+              <Link
+                to="/users/new"
+                style={{ textDecoration: "none" }}
+                element={<New inputs={userInputs} title="Add New User" />}
+              >
+                <span>Edit</span>
+              </Link>
+            </div>
             <h1 className="title">Information</h1>
             <div className="item">
               <img
@@ -85,9 +85,6 @@ const Single = ({ data }) => {
                   <span className="itemValue">
                     Elton St. 234 Garden Yd. NewYork
                   </span>
-                  {/* <span className="itemValue">
-                    {data.address}
-                  </span> */}
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Country:</span>
