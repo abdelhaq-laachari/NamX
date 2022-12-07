@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -12,6 +10,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function Copyright(props) {
   return (
@@ -34,14 +34,47 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const [formErrors, setFormErrors] = React.useState({});
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const email = data.get("email");
+    const password = data.get("password");
     const formData = {
-      email: data.get("email"),
-      password: data.get("password"),
+      email,
+      password,
     };
-    console.log(formData)
+    setFormErrors(validate(formData));
+    if (email && password) {
+      try {
+        const res = await axios.post("admin/login", formData);
+        console.log(res.data);
+        localStorage.setItem("accessToken", res.data.token);
+        window.location.href = "/";
+      } catch (error) {
+        console.log(error);
+        if (error.response.status === 401) {
+          toast.error(error.response.data.message);
+        }
+      }
+    }
+  };
+
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.email) {
+      errors.email = "Email is required!";
+    } else if (!regex.test(values.email)) {
+      errors.email = "This is not a valid email format!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required";
+    } else if (values.password.length < 4) {
+      errors.password = "Password must be more than 4 characters";
+    }
+    return errors;
   };
 
   return (
@@ -71,6 +104,7 @@ export default function SignIn() {
             <TextField
               margin="normal"
               required
+              error={formErrors.email ? true : false}
               fullWidth
               id="email"
               label="Email Address"
@@ -78,9 +112,15 @@ export default function SignIn() {
               autoComplete="email"
               autoFocus
             />
+            {formErrors.email && (
+              <Typography variant="body2" color="error">
+                {formErrors.email}
+              </Typography>
+            )}
             <TextField
               margin="normal"
               required
+              error={formErrors.password ? true : false}
               fullWidth
               name="password"
               label="Password"
@@ -88,10 +128,11 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+            {formErrors.password && (
+              <Typography variant="body2" color="error">
+                {formErrors.password}
+              </Typography>
+            )}
             <Button
               type="submit"
               fullWidth

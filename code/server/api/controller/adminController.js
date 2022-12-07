@@ -1,4 +1,3 @@
-
 const asyncHandler = require("express-async-handler");
 const Admin = require("../models/adminModel");
 const jwt = require("jsonwebtoken");
@@ -36,16 +35,11 @@ const registerAdmin = asyncHandler(async (req, res) => {
     email,
     password: hashedPassword,
     token: generateToken(),
-    
   });
 
   //   if admin created send success message
   if (admin) {
     res.status(201).json({
-      _id: admin.id,
-      firstName: admin.firstName,
-      lastName: admin.lastName,
-      email: admin.email,
       token: generateToken(admin._id),
     });
   } else {
@@ -58,17 +52,16 @@ const registerAdmin = asyncHandler(async (req, res) => {
 // @route   POST /api/admin/login
 // @access  Public
 const authAdmin = asyncHandler(async (req, res) => {
+<<<<<<< HEAD
   // res.json({message:'Login Admin'})
 
+=======
+>>>>>>> 29cd07c0477bcf9a44da0a6d1eb6b4893191cf1d
   const { email, password } = req.body;
   const admin = await Admin.findOne({ email });
 
   if (admin && (await bcrypt.compare(password, admin.password))) {
     res.json({
-      _id: admin._id,
-      firstName: admin.firstName,
-      lastName: admin.lastName,
-      email: admin.email,
       token: generateToken(admin._id),
     });
   } else {
@@ -82,7 +75,7 @@ const authAdmin = asyncHandler(async (req, res) => {
 // @access  Private
 
 const getAdmin = asyncHandler(async (req, res) => {
-  const admin = await Admin.findById(req.params.id);
+  const admin = await Admin.findById(req.admin);
   res.status(200).json(admin);
 });
 
@@ -91,7 +84,7 @@ const getAdmin = asyncHandler(async (req, res) => {
 // @access  Private
 
 const updateAdmin = asyncHandler(async (req, res) => {
-  const adminId = req.params.id;
+  const adminId = req.admin;
   const admin = await Admin.findById(adminId);
   if (!admin) {
     res.status(404);

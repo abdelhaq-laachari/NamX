@@ -53,6 +53,7 @@ export default function SignUp() {
       password: data.get("password"),
     };
     console.log(formData);
+    
   };
 
   return (

@@ -17,6 +17,9 @@ const {
   deleteCar,
 } = require("../controller/carController");
 
+// get function from client controller
+const { createClient } = require("../controller/clientController");
+
 // get function from details controller
 const {
   getDetails,
@@ -24,6 +27,9 @@ const {
   updateDetail,
   deleteDetail,
 } = require("../controller/detailsController");
+
+// get function from order controller
+const { newOrder } = require("../controller/orderController");
 
 
 //  Protect all routes
@@ -33,7 +39,7 @@ const { protect } = require("../middleware/authMiddleware");
 router.route("/login").post(authAdmin);
 router.route("/registerAdmin").post(registerAdmin);
 router.route("/update/:id").put(protect, updateAdmin);
-router.route("/getAdmin/:id").get(protect, getAdmin);
+router.route("/getAdmin").get(protect, getAdmin);
 
 // add route for car crud
 
@@ -47,6 +53,13 @@ router.route("/getDetails").get(protect, getDetails);
 router.route("/addDetails").post(protect, addDetails);
 router.route("/updateDetail/:id").put(protect, updateDetail);
 router.route("/deleteDetail/:id").delete(protect, deleteDetail);
+
+
+// Create route for orders
+router.route("/newOrder").post(newOrder);
+// router.route("/addDetails").post(protect, addDetails);
+// router.route("/updateDetail/:id").put(protect, updateDetail);
+// router.route("/deleteDetail/:id").delete(protect, deleteDetail);
 
 // export route file
 module.exports = router;
