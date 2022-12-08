@@ -7,6 +7,7 @@ const port = process.env.PORT || 6000; // set our port
 const app = express();
 const connectDB = require("./config/db"); // import db connection
 
+
 connectDB(); // connect to db
 
 app.use(cors()); // enable cors
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/admin', require('./routes/adminRoutes'));
+
 
 
 app.use(errorHandler)

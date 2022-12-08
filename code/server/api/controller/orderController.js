@@ -13,7 +13,7 @@ const newOrder = asyncHandler(async (req, res) => {
     req.body;
 
   const firstName = fullName.split(" ")[0];
-
+ 
   if (
     !fullName ||
     !address ||
