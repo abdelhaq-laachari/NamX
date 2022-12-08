@@ -1,47 +1,38 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../datatablesource";
+import { carColumns, userColumns, orderColumns } from "../../datatablesource";
+import { carAction, orderAction, userAction } from "../../actionTable";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import axios from "axios";
 
-const Datatable = () => {
-  const [data, setData] = useState(userRows);
-
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+const Datatable = ({ data }) => {
+  const path = window.location.pathname.split("/")[1];
+  const handleDelete = (_id) => {
+    data.filter((item) => item._id !== _id);
   };
 
-  const actionColumn = [
-    {
-      field: "action",
-      headerName: "Action",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="cellAction">
-            <Link to="/users/id" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
-            <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
-            >
-              Delete
-            </div>
-          </div>
-        );
-      },
-    },
-  ];
+
+  // add switch statement to handle different paths
+  const switchFunction = () => {
+    switch (path) {
+      case "users":
+        return userColumns.concat(userAction);
+      case "cars":
+        return carColumns.concat(carAction);
+      case "orders":
+        return orderColumns.concat(orderAction);
+      default:
+    }
+  };
+
   return (
     <div className="datatable">
-      <div className="datatableTitle">
-        All New Users
-      </div>
+      <div className="datatableTitle">All New Users</div>
       <DataGrid
         className="datagrid"
+        getRowId={(row) => row._id}
         rows={data}
-        columns={userColumns.concat(actionColumn)}
+        columns={switchFunction()}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection

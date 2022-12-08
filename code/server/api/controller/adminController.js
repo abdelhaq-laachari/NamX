@@ -75,7 +75,7 @@ const authAdmin = asyncHandler(async (req, res) => {
 // @access  Private
 
 const getAdmin = asyncHandler(async (req, res) => {
-  const admin = await Admin.findById(req.admin);
+  const admin = await Admin.findById(req.admin).select("-password");
   res.status(200).json(admin);
 });
 

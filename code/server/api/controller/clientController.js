@@ -1,6 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const Client = require("../models/clientModel");
 
+// @desc    Create a new client
+// @route   POST /api/client
+// @access  Public
 const createClient = asyncHandler(async (req, res) => {
   const { fullName, address, city, phoneNumber, email } = req;
 
@@ -18,6 +21,25 @@ const createClient = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc    Get a single client
+// @route   GET /admin/singleClient/:id
+// @access  Private
+const singleClient = asyncHandler(async (req, res) => {
+  const client = await Client.findById(req.params.id)
+  res.send(client);
+});
+
+// @desc    Get all clients
+// @route   GET /admin/clients
+// @access  Private
+
+const getClients = asyncHandler(async (req, res) => {
+  const clients = await Client.find();
+  res.send(clients);
+});
+
 module.exports = {
   createClient,
+  singleClient,
+  getClients,
 };

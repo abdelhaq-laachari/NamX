@@ -15,8 +15,8 @@ const protect = asyncHandler(async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       // Get admin by id
       req.admin = await admin.findById(decoded.id).select("-password");
-      res.send(req.admin);
-      next();
+    //   res.send(req.admin);
+    next();
     } catch (error) {
       console.error(error);
       res.status(401);
