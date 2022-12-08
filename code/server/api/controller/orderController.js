@@ -1,9 +1,13 @@
 const asyncHandler = require("express-async-handler");
 const Order = require("../models/orderModel");
 const Client = require("../models/clientModel");
+<<<<<<< HEAD
 const { sendMail } = require("emailsender-js");
 const authEmail = process.env.EMAIL;
 const authPassword = process.env.PASS;
+=======
+const helper = require("../template/controller/email");
+>>>>>>> abdelhaq-laachari
 
 // @desc    Create new order by client
 // @route   POST /newOrder
@@ -20,7 +24,7 @@ const newOrder = asyncHandler(async (req, res) => {
     !city ||
     !phoneNumber ||
     !email ||
-    !quantity ||
+    !quantity || 
     !idCar
   ) {
     res.status(400);
@@ -63,7 +67,9 @@ const newOrder = asyncHandler(async (req, res) => {
 // @route   GET /orders
 // @access  Private
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find();
+  const orders = await Order.find({})
+    .populate("idClient", "fullName")
+    .populate("idCar", "model");
   res.status(200).json(orders);
 });
 

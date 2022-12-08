@@ -69,7 +69,7 @@ const authAdmin = asyncHandler(async (req, res) => {
 // @access  Private
 
 const getAdmin = asyncHandler(async (req, res) => {
-  const admin = await Admin.findById(req.params.id);
+  const admin = await Admin.findById(req.admin).select("-password");
   res.status(200).json(admin);
 });
 
@@ -78,7 +78,7 @@ const getAdmin = asyncHandler(async (req, res) => {
 // @access  Private
 
 const updateAdmin = asyncHandler(async (req, res) => {
-  const adminId = req.params.id;
+  const adminId = req.admin;
   const admin = await Admin.findById(adminId);
   if (!admin) {
     res.status(404);
