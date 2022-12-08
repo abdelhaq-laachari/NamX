@@ -31,7 +31,7 @@ function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="users">
               <Route index element={<Users />} />
-              <Route path=":userId" element={<User />} />
+              <Route path="single" element={<User />} />
               <Route
                 path="new"
                 element={<New inputs={userInputs} title="Add New User" />}
