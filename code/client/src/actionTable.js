@@ -29,6 +29,7 @@ export const userAction = [
   },
 ];
 
+// car action table
 export const carAction = [
   {
     field: "action",
@@ -57,6 +58,7 @@ export const carAction = [
   },
 ];
 
+// order action table
 export const orderAction = [
   {
     field: "action",
@@ -65,19 +67,12 @@ export const orderAction = [
     renderCell: (params) => {
       return (
         <div className="cellAction">
-          {/* <Link to="/users/id" style={{ textDecoration: "none" }}>
-              <div
-                className="viewButton"
-                onClick={() => viewUser(params.row._id)}
-              >
-                View
-              </div>
-            </Link> */}
+          <div className="acceptButton">Accept</div>
           <div
             className="deleteButton"
             //   onClick={() => handleDelete(params.row._id)}
           >
-            Delete
+            Cancel
           </div>
         </div>
       );
