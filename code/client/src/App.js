@@ -15,6 +15,7 @@ import Profile from "./pages/profile/Profile";
 import User from "./pages/single user/User";
 import Users from "./pages/all users/Users";
 import Cars from "./pages/cars/Cars";
+import Orders from "./pages/orders/Orders";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -38,6 +39,14 @@ function App() {
             </Route>
             <Route path="cars">
               <Route index element={<Cars />} />
+              <Route path=":productId" element={<Single />} />
+              <Route
+                path="new"
+                element={<New inputs={productInputs} title="Add New Product" />}
+              />
+            </Route>
+            <Route path="orders">
+              <Route index element={<Orders />} />
               <Route path=":productId" element={<Single />} />
               <Route
                 path="new"

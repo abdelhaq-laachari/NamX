@@ -68,7 +68,7 @@ export const carColumns = [
     field: "model",
     headerName: "Model",
     width: 230,
-  }
+  },
 ];
 
 export const orderColumns = [
@@ -81,17 +81,31 @@ export const orderColumns = [
   {
     field: "status",
     headerName: "Status",
-    width: 230,
+    width: 160,
+    renderCell: (params) => {
+      return (
+        <div className={`cellWithStatus ${params.row.status}`}>
+          {params.row.status}
+        </div>
+      );
+    },
   },
   {
+    // get the name of the client from the object id
     field: "idClient",
     headerName: "Client",
     width: 230,
+    renderCell: (params) => {
+      return <div className="cellWithImg">{params.row.idClient.fullName}</div>;
+    },
   },
   {
     field: "idCar",
     headerName: "Car",
     width: 230,
+    renderCell: (params) => {
+      return <div className="cellWithImg">{params.row.idCar.model}</div>;
+    },
   },
 ];
 

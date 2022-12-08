@@ -2,7 +2,6 @@ import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { carColumns, userColumns, orderColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Datatable = ({ data }) => {
@@ -11,25 +10,32 @@ const Datatable = ({ data }) => {
     data.filter((item) => item._id !== _id);
   };
 
+  const token = localStorage.getItem("accessToken");
+  const viewUser = async (_id) => {
+    console.log(_id);
+    // get data by id using axios
+    axios
+      .get(`admin/singleClient/${_id}`, {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => {
+        console.log(res.data);
+        // setData(res.data);
+      });
+  };
+
   // add switch statement to handle different paths
- const switchFunction = () => {
-  switch (path) {
-    case "users":
-      return (
-        userColumns.concat(actionColumn)
-      );
-    case "cars":
-      return (
-        carColumns.concat(actionColumn)
-      );
-    case "orders":
-      return (
-        orderColumns.concat(actionColumn)
-      );
-    default:
-  }
-}
-      
+  const switchFunction = () => {
+    switch (path) {
+      case "users":
+        return userColumns.concat(actionColumn);
+      case "cars":
+        return carColumns.concat(actionColumn);
+      case "orders":
+        return orderColumns.concat(actionColumn);
+      default:
+    }
+  };
 
   const actionColumn = [
     {
@@ -40,7 +46,12 @@ const Datatable = ({ data }) => {
         return (
           <div className="cellAction">
             <Link to="/users/id" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
+              <div
+                className="viewButton"
+                onClick={() => viewUser(params.row._id)}
+              >
+                View
+              </div>
             </Link>
             <div
               className="deleteButton"
@@ -60,11 +71,6 @@ const Datatable = ({ data }) => {
         className="datagrid"
         getRowId={(row) => row._id}
         rows={data}
-        // columns={
-        //   path === "users"
-        //     ? userColumns.concat(actionColumn)
-        //     : path === "cars" && carColumns.concat(actionColumn)
-        // }
         columns={switchFunction()}
         pageSize={9}
         rowsPerPageOptions={[9]}

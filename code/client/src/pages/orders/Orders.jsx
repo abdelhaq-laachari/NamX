@@ -8,7 +8,6 @@ import axios from "axios";
 const Cars = () => {
   const token = localStorage.getItem("accessToken");
   const [data, setData] = useState([]);
-  // get data from database using axios
   useEffect(() => {
     axios
       .get("admin/getOrders", {

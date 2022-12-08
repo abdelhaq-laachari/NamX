@@ -55,7 +55,7 @@ const newOrder = asyncHandler(async (req, res) => {
 // @route   GET /orders
 // @access  Private
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find()
+  const orders = await Order.find({})
     .populate("idClient", "fullName")
     .populate("idCar", "model");
   res.status(200).json(orders);
