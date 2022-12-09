@@ -67,14 +67,24 @@ export const orderAction = [
     renderCell: (params) => {
       return (
         <div className="cellAction">
-          <div className="acceptButton">Accept</div>
+          {/* <div className="acceptButton">Accept</div>
           <div
             className="deleteButton"
-            //   onClick={() => handleDelete(params.row._id)}
+              // onClick={() => handleDelete(params.row._id)}
           >
             Cancel
+          </div> */}
+         
+            <Link to="/users/single" style={{ textDecoration: "none" }}>
+              <div
+                className="viewButton"
+                onClick={() => viewUser(params.row._id)}
+              >
+                Details
+              </div>
+            </Link>
           </div>
-        </div>
+        
       );
     },
   },
