@@ -25,7 +25,14 @@ const Datatable = ({ data, title }) => {
 
   return (
     <div className="datatable">
-      <div className="datatableTitle">{title}</div>
+      <div className="title">
+        <div className="datatableTitle">{title}</div>
+        {path === "cars" ? (
+          <Link to="/newCar">
+            <button className="addButton">Add New Car</button>
+          </Link>
+        ) : null}
+      </div>
       <DataGrid
         className="datagrid"
         getRowId={(row) => row._id}
