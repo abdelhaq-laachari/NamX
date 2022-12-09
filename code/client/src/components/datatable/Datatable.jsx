@@ -4,7 +4,7 @@ import { carColumns, userColumns, orderColumns } from "../../datatablesource";
 import { carAction, orderAction, userAction } from "../../actionTable";
 import { Link } from "react-router-dom";
 
-const Datatable = ({ data }) => {
+const Datatable = ({ data, title }) => {
   const path = window.location.pathname.split("/")[1];
   const handleDelete = (_id) => {
     data.filter((item) => item._id !== _id);
@@ -25,7 +25,14 @@ const Datatable = ({ data }) => {
 
   return (
     <div className="datatable">
-      <div className="datatableTitle">All New Users</div>
+      <div className="title">
+        <div className="datatableTitle">{title}</div>
+        {path === "cars" ? (
+          <Link to="/newCar">
+            <button className="addButton">Add New Car</button>
+          </Link>
+        ) : null}
+      </div>
       <DataGrid
         className="datagrid"
         getRowId={(row) => row._id}

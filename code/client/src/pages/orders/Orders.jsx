@@ -24,7 +24,7 @@ const Cars = () => {
       <Sidebar />
       <div className="listContainer">
         <Navbar />
-        <Datatable data={data} />
+        <Datatable data={data} title="All Orders" />
       </div>
     </div>
   );
