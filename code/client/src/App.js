@@ -64,7 +64,8 @@ function App() {
             </Route>
           </Routes>
         ) : (
-          window.location.pathname !== "/login" && <Login />
+          window.location.pathname !== "/login" && <Login /> &&
+          window.location.pathname !== "/register" && <Register />
         )}
       </BrowserRouter>
       <ToastContainer position="top-right" autoClose={2000} />
