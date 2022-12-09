@@ -50,7 +50,7 @@ export const userColumns = [
 ];
 
 export const carColumns = [
-  { field: "_id", headerName: "ID", width: 170 },
+  { field: "_id", headerName: "ID", width: 100 },
   // {
   //   field: "car",
   //   headerName: "Car",
