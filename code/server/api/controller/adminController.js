@@ -64,6 +64,8 @@ const authAdmin = asyncHandler(async (req, res) => {
     throw new Error("Invalid email or password");
   }
 });
+
+
 // @desc    Get admin information
 // @route   GET /admin/getAdmin/:id
 // @access  Private
@@ -90,7 +92,7 @@ const updateAdmin = asyncHandler(async (req, res) => {
   res.status(200).json(updateProfile);
 });
 
-// Geberate JWT
+// Generate JWT
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "1d",
