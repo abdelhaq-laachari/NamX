@@ -76,7 +76,7 @@ export const orderColumns = [
   {
     field: "quantity",
     headerName: "Quantity",
-    width: 230,
+    width: 100,
   },
   {
     field: "status",
