@@ -25,7 +25,7 @@ const Users = () => {
       <Sidebar />
       <div className="listContainer">
         <Navbar />
-        <Datatable data={data} />
+        <Datatable data={data} title="All Users" />
       </div>
     </div>
   );
