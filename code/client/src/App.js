@@ -16,6 +16,7 @@ import User from "./pages/single user/User";
 import Users from "./pages/all users/Users";
 import Cars from "./pages/cars/Cars";
 import Orders from "./pages/orders/Orders";
+import NewCar from "./pages/new car/NewCar";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/">
               <Route index element={<Home />} />
               <Route path="profile" element={<Profile />} />
+              <Route path="newCar" element={<NewCar />} />
               <Route path="users">
                 <Route index element={<Users />} />
                 <Route path="single" element={<User />} />
@@ -45,6 +47,7 @@ function App() {
               <Route path="cars">
                 <Route index element={<Cars />} />
                 <Route path=":productId" element={<Single />} />
+                
                 <Route
                   path="new"
                   element={
