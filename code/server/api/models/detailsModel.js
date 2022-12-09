@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 const detailsSchema = mongoose.Schema(
   {
-    libelle: {
-      type: String,
-      required: [true, "Please enter your libelle"],
-    },
-    value: {
-      type: String,
-      required: [true, "Please enter your value"],
-    },
-    car: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Car",
-    },
+    details: [
+      {
+        libelle: {
+          type: String,
+          required: [true, "Please enter your libelle"],
+        },
+        value: {
+          type: String,
+          required: [true, "Please enter your value"],
+        },
+      },
+    ],
   },
   {
     timestamp: true,

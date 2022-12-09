@@ -13,19 +13,17 @@ const getDetails = asyncHandler(async (req, res) => {
 // @route   POST admin/details
 // @access  Private
 const addDetails = asyncHandler(async (req, res) => {
-  const { libelle, value, car } = req.body;
-  if (!libelle || !value || !car) {
+  const { details } = req.body;
+  if (!details) {
     res.status(400);
     throw new Error("Please add a text field");
   }
 
-  const details = await Details.create({
-    libelle,
-    value,
-    car,
+  const detail = await Details.create({
+    details,
   });
 
-  res.status(200).json(details);
+  res.status(200).json(detail);
 });
 
 // @desc    Update a detail
