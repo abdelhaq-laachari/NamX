@@ -1,7 +1,7 @@
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
-import List from "./pages/list/List";
+// import List from "./pages/list/List";
 import Single from "./components/single/Single";
 import New from "./pages/new/New";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -17,6 +17,9 @@ import Users from "./pages/all users/Users";
 import Cars from "./pages/cars/Cars";
 import Orders from "./pages/orders/Orders";
 import NewCar from "./pages/new car/NewCar";
+// import { lazy, Suspense } from 'react';
+// const Home = lazy(() => import('./pages/home/Home'));
+
 
 
 function App() {
@@ -26,6 +29,7 @@ function App() {
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
+        {/* <Suspense fallback={<div>hhh</div>}></Suspense> */}
         <Routes>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
