@@ -1,11 +1,29 @@
-import "./new.scss";
+
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState } from "react";
+import  { useEffect, useState } from "react";
+import axios from "axios";
 
-const New = ({ inputs, title }) => {
+
+const NewCar = ({ inputs, title }) => {
+  const [data, setData] = useState();
   const [file, setFile] = useState("");
+  //   const data = [];
+  const token = localStorage.getItem("accessToken");
+
+  // get admin data using axios
+  useEffect(() => {
+    const getAdmin = async () => {
+      const res = await axios.get("/admin/getAdmin", {
+        headers: { Authorization: "Bearer " + token },
+      });
+      //   data.push(res.data); 
+      setData(res.data);
+    };
+    getAdmin();
+    console.log(data);
+  }, []);
 
   return (
     <div className="new">
@@ -50,9 +68,9 @@ const New = ({ inputs, title }) => {
             </form>
           </div>
         </div>
-      </div>
+      </div> 
     </div>
   );
 };
 
-export default New;
+export default NewCar;

@@ -1,19 +1,18 @@
-
+import './newCars.scss';
+import Sidebar from "../../components/sidebar/Sidebar";
+import Navbar from "../../components/navbar/Navbar";
 const NewCar = () => {
 
-    return (
-        <>
-            <h1>New Car</h1>
-            
-
-        </>
-
-
-         
-
+  return (
+    <div className="new">
+      <Sidebar />
+      <div className="newContainer">
+              <Navbar />
+        
+       
+      </div> 
+    </div>
   );
 };
 
 export default NewCar;
-
-
