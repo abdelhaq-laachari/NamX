@@ -52,11 +52,6 @@ const registerAdmin = asyncHandler(async (req, res) => {
 // @route   POST /api/admin/login
 // @access  Public
 const authAdmin = asyncHandler(async (req, res) => {
-<<<<<<< HEAD
-  // res.json({message:'Login Admin'})
-
-=======
->>>>>>> 29cd07c0477bcf9a44da0a6d1eb6b4893191cf1d
   const { email, password } = req.body;
   const admin = await Admin.findOne({ email });
 
