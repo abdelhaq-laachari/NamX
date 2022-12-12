@@ -75,11 +75,11 @@ export default function AccountMenu() {
         <MenuItem>
           <Avatar /> Profile
         </MenuItem>
-        <MenuItem>
+        {/* <MenuItem>
           <Avatar /> My account
-        </MenuItem>
+        </MenuItem> */}
         <Divider />
-        <MenuItem>
+        {/* <MenuItem>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
@@ -90,8 +90,13 @@ export default function AccountMenu() {
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
-        </MenuItem>
-        <MenuItem>
+        </MenuItem> */}
+        <MenuItem
+          onClick={() => {
+            localStorage.clear();
+            window.location.href = "/login";
+          }}
+        >
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

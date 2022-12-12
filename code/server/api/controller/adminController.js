@@ -65,6 +65,10 @@ const authAdmin = asyncHandler(async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> cc4f72527935f03c06f14a25a017898db3aa403d
 // @desc    Get admin information
 // @route   GET /admin/getAdmin/:id
 // @access  Private
@@ -91,7 +95,7 @@ const updateAdmin = asyncHandler(async (req, res) => {
   res.status(200).json(updateProfile);
 });
 
-// Geberate JWT
+// Generate JWT
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "1d",

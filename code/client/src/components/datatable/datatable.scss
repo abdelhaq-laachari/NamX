@@ -1,24 +1,36 @@
 .datatable {
   height: 600px;
   padding: 20px;
-  
-  .datatableTitle{
-    width: 100%;
-    font-size: 24px;
-    color: gray;
-    margin-bottom: 10px;
+
+  .title {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    .datatableTitle {
+      width: 100%;
+      font-size: 24px;
+      color: gray;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-    .link{
-      text-decoration: none;
-      color: green;
-      font-size: 16px;
-      font-weight: 400;
-      border: 1px solid green;
+      .link {
+        text-decoration: none;
+        color: green;
+        font-size: 16px;
+        font-weight: 400;
+        border: 1px solid green;
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+    .addButton{
+      width: 100px;
       padding: 5px;
       border-radius: 5px;
+      color: green;
+      border: 1px dotted rgba(20, 220, 37, 0.6);
       cursor: pointer;
     }
   }
@@ -40,7 +52,7 @@
     padding: 5px;
     border-radius: 5px;
 
-    &.active {
+    &.accepted {
       background-color: rgba(0, 128, 0, 0.05);
       color: green;
     }
@@ -48,7 +60,7 @@
       background-color: rgba(255, 217, 0, 0.05);
       color: goldenrod;
     }
-    &.passive {
+    &.cancelled {
       background-color: rgba(255, 0, 0, 0.05);
       color: crimson;
     }
@@ -66,12 +78,19 @@
       border: 1px dotted rgba(0, 0, 139, 0.596);
       cursor: pointer;
     }
-    
+
     .deleteButton {
       padding: 2px 5px;
       border-radius: 5px;
       color: crimson;
       border: 1px dotted rgba(220, 20, 60, 0.6);
+      cursor: pointer;
+    }
+    .acceptButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: green;
+      border: 1px dotted rgba(20, 220, 37, 0.6);
       cursor: pointer;
     }
   }

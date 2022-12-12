@@ -10,7 +10,7 @@ import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import Profile from "./pages/profile/Profile";
 import User from "./pages/single user/User";
 import Users from "./pages/all users/Users";
@@ -19,6 +19,7 @@ import Orders from "./pages/orders/Orders";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
+  const token = localStorage.getItem("accessToken");
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
@@ -27,37 +28,48 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="users">
-              <Route index element={<Users />} />
-              <Route path="single" element={<User />} />
-              <Route
-                path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
-              />
-            </Route>
-            <Route path="cars">
-              <Route index element={<Cars />} />
-              <Route path=":productId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
-              />
-            </Route>
-            <Route path="orders">
-              <Route index element={<Orders />} />
-              <Route path=":productId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
-              />
-            </Route>
-          </Route>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
         </Routes>
+        {token ? (
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="users">
+                <Route index element={<Users />} />
+                <Route path="single" element={<User />} />
+                <Route
+                  path="new"
+                  element={<New inputs={userInputs} title="Add New User" />}
+                />
+              </Route>
+              <Route path="cars">
+                <Route index element={<Cars />} />
+                <Route path=":productId" element={<Single />} />
+                <Route
+                  path="new"
+                  element={
+                    <New inputs={productInputs} title="Add New Product" />
+                  }
+                />
+              </Route>
+              <Route path="orders">
+                <Route index element={<Orders />} />
+                <Route path=":productId" element={<Single />} />
+                <Route
+                  path="new"
+                  element={
+                    <New inputs={productInputs} title="Add New Product" />
+                  }
+                />
+              </Route>
+            </Route>
+          </Routes>
+        ) : (
+          window.location.pathname !== "/login" && <Login /> &&
+          window.location.pathname !== "/register" && <Register />
+        )}
       </BrowserRouter>
       <ToastContainer position="top-right" autoClose={2000} />
     </div>

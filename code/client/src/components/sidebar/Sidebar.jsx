@@ -70,7 +70,12 @@ const Sidebar = () => {
               <span>Profile</span>
             </li>
           </Link>
-          <li>
+          <li
+            onClick={() => {
+              localStorage.clear();
+              window.location.replace("/login");
+            }}
+          >
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>
