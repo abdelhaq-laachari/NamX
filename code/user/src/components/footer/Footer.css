@@ -1,0 +1,53 @@
+/* #container {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .center {
+    width: 180px;
+    height: 60px;
+    position: absolute;
+  }
+  
+  .btn {
+    width: 180px;
+    height: 60px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #24e665;
+    outline: none;
+    transition: 1s ease-in-out;
+  }
+  
+  svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    fill: none;
+    stroke: rgb(104, 216, 90);
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
+  }
+  
+  .btn:hover {
+    transition: 1s ease-in-out;
+    background: #5ce86c;
+  }
+  
+  .btn:hover svg {
+    stroke-dashoffset: -480;
+  }
+  
+  .btn span {
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+  }
+   */

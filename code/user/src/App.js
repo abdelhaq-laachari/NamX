@@ -9,6 +9,7 @@ import {
 import Home from './pages/home/Home';
 import Voiture_hydrogene from './pages/voiture-hydrogene/Voiture_hydrogene'
 import NAMXConcept from './pages/NAMX Concept/NAMXConcept'
+import Footer from './components/footer/Footer';
 function App() {
   return (
     <div >
@@ -20,6 +21,7 @@ function App() {
   <Route path='/NAMXConcept' exact element={<NAMXConcept />} />
   </Routes>
 </Router>
+<Footer/>
     </div>
   );
 }
