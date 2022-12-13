@@ -1,5 +1,5 @@
 import React from "react";
-
+import './Voiture_hydrogene.css'
 function Voiture_hydrogene() {
   return (
     <div>
@@ -45,8 +45,8 @@ function Voiture_hydrogene() {
       <div class="container mx-auto px-8 py-20">
         <div class="flex flex-col md:flex-row items-center">
           <div class="w-full md:w-1/2">
-            <h1 class="text-4xl font-bold text-green-600 md:mx-6">
-              RECHARGE HYDROGÈNE
+            <h1 class="text-4xl   md:mx-6">
+              RECHARGE <span class="text-green-600 font-bold">HYDROGÈNE</span>
             </h1>
             <p class="text-black  w-3/5  mt-4 text-justify md:mx-6">
               Tout d’abord, il est important de souligner qu’une voiture à
@@ -74,11 +74,18 @@ function Voiture_hydrogene() {
             </p>
           </div>
           <div class="w-full md:w-1/2 pt-12 md:mt-0">
-            <img
+          <div class="card">
+          <img
               className="w-full h-full object-cover rounded-lg shadow-2xl"
-              src="https://www.namx-hydrogen.com/img/fonctionnement-voiture-hydrogene/recharge-hydrogene-namx-1920w.webp"
+              src="https://www.namx-hydrogen.com/img/fonctionnement-voiture-hydrogene/vehicule-hydrogene-namx.webp"
               alt="recharge-hydrogene-namx-1920w.webp"
             />
+ <span class="top span"></span>
+ <span class="right span"></span>
+ <span class="bottom span"></span>
+ <span class="left span"></span> 
+</div>
+         
           </div>
         </div>
       </div>
@@ -128,6 +135,7 @@ function Voiture_hydrogene() {
           </div>
       </div>
       </section>
+     
     </div>
   );
 }

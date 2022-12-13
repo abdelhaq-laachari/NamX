@@ -23,8 +23,8 @@ function Navbar() {
       <ul class="sm:flex space-x-4 hidden items-center">
         <li><a href="/" class="text-gray-700 hover:text-indigo-600 text-md ">Home</a></li>
         <li><a href="/voiture_hydrogene" class="text-gray-700 hover:text-indigo-600 text-md ">voiture_hydrogene</a></li>
-        <li><a href="#" class="text-gray-700 hover:text-indigo-600 text-md ">Services</a></li>
-        <li><a href="#" class="text-gray-700 hover:text-indigo-600 text-md ">Products</a></li>
+        <li><a href="/NAMXConcept" class="text-gray-700 hover:text-indigo-600 text-md ">NAMX Concept</a></li>
+        
         <li><a href="#" class="text-gray-700 hover:text-indigo-600 text-md ">Contact</a></li>
       </ul>
 
