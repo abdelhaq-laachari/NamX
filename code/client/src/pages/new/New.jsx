@@ -3,10 +3,41 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
+import axios from "axios";
+import {successMessage} from "../../alert";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
+  const [info, setInfo] = useState({});
   const path = window.location.pathname.split("/")[1];
+  const token = localStorage.getItem("accessToken");
+
+  const handleChange = (e) => {
+    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = {
+        ...info,
+      };
+      const res = await axios.post("/admin/addCars", formData, {
+        headers: { Authorization: "Bearer " + token },
+      });
+      if(res){
+        successMessage("Car added successfully");
+        // go to cars page after time out
+        setTimeout(() => {
+          window.location.replace("/cars");
+        }
+        , 2000);
+
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="new">
@@ -48,10 +79,15 @@ const New = ({ inputs, title }) => {
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
                   <label>{input.label}</label>
-                  <input type={input.type} placeholder={input.placeholder} />
+                  <input
+                    type={input.type}
+                    placeholder={input.placeholder}
+                    onChange={handleChange}
+                    id={input.type}
+                  />
                 </div>
               ))}
-              <button>Send</button>
+              <button onClick={handleSubmit}>Send</button>
             </form>
           </div>
         </div>

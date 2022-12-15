@@ -65,10 +65,6 @@ const authAdmin = asyncHandler(async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> cc4f72527935f03c06f14a25a017898db3aa403d
 // @desc    Get admin information
 // @route   GET /admin/getAdmin/:id
 // @access  Private
