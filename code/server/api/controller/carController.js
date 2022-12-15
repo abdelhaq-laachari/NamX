@@ -13,14 +13,22 @@ const getCars = asyncHandler(async (req, res) => {
 // @route   POST /api/cars
 // @access  Private
 const addCars = asyncHandler(async (req, res) => {
-  const model = req.body
-  if (!model) {
+  const { name, edition, horsepower, maxSpeed, acceleration, autonomy } =
+    req.body;
+  if (
+    !name ||
+    !edition ||
+    !horsepower ||
+    !maxSpeed ||
+    !acceleration ||
+    !autonomy
+  ) {
     res.status(400);
     throw new Error("Please add a text field");
   }
 
   const car = await Car.create({
-    model: req.body.model,
+    model: req.body,
   });
 
   res.status(200).json(car);
