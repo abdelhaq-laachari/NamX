@@ -1,0 +1,59 @@
+*{padding: 0; margin: 0; box-sizing: border-box;}
+body{height: 900px;}
+header {
+	background: url('https://www.namx-hydrogen.com/img/home/suv-hydrogene-1920w.webp');
+	text-align: center !important;
+	width: 100% !important;
+	height: 800px !important;
+	background-size: cover !important;
+	background-attachment: fixed !important;
+    background-position: bottom !important;
+	background-repeat: no-repeat !important;
+	
+	position: relative !important;
+	overflow: hidden !important;
+
+/* Responsive Triangle Header Shape | CSS Header  */
+clip-path: polygon(
+    0% 0%, /* left top */
+    100% 0%, /* right top */
+    100% 80%, /* right bottom */
+    50% 100% ,/* left bottom */
+    0% 80% /* left bottom */
+);
+
+}
+header .overlay{
+	width: 100%;
+	height: 100%;
+	padding: 50px;
+	color: #FFF;
+	text-shadow: 1px 1px 1px #333;
+  background-image: linear-gradient( 135deg, 10%, #fd5e086b 100%);
+	
+}
+
+.h1header {
+	/* font-family: 'Dancing Script', cursive; */
+	font-size: 80px;
+	margin-bottom: 30px;
+}
+
+/* h3, p {
+	font-family: 'Open Sans', sans-serif;
+	margin-bottom: 30px;
+} */
+
+button {
+	border: none;
+	outline: none;
+	padding: 10px 20px;
+	border-radius: 50px;
+	color: #333;
+	background: #fff;
+	margin-bottom: 50px;
+	box-shadow: 0 3px 20px 0 #0000003b;
+}
+button:hover{
+	cursor: pointer;
+}

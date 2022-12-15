@@ -12,6 +12,18 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function Copyright(props) {
+  // register 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const formData = {
+      email: data.get("email"),
+      password: data.get("password"),
+    };
+    console.log(formData)
+  };
+
+
   return (
     <Typography
       variant="body2"
@@ -112,6 +124,7 @@ export default function SignUp() {
                 />
               </Grid>
             </Grid>
+
             <Button
               type="submit"
               fullWidth
@@ -120,6 +133,7 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
+            
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/login" variant="body2">
