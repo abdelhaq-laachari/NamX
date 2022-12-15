@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { errorMessage } from "./alert";
+import { errorMessage, sweetAlert } from "./alert";
 
 // view user
 const viewUser = async (_id) => {
@@ -20,15 +20,12 @@ const deleteCar = async (_id) => {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     };
-
-    // delete car without reload
-    await axios.delete(`/admin/deleteCar/${_id}`);
-    window.location.reload();
+    const res = await axios.delete(`/admin/deleteCar/${_id}`, config);
   } catch (error) {
-    // console.log(error.response.data.message);
     errorMessage(error.response.data.message);
   }
 };
+
 
 export const userAction = [
   {
@@ -71,7 +68,14 @@ export const carAction = [
           </Link>
           <div
             className="deleteButton"
-            onClick={() => deleteCar(params.row._id)}
+            // onClick={() => deleteCar(params.row._id)}
+            onClick={()=>{
+              sweetAlert({
+                title: "Are you sure?",
+                message: "Once deleted, you will not be able to recover this car!",
+                deleteCar: () => deleteCar(params.row._id),
+              });
+            }}
           >
             Delete
           </div>

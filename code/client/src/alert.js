@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import swal from "sweetalert";
 
 // error message
 export const errorMessage = (error) => {
@@ -49,5 +50,24 @@ export const infoMessage = (info) => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
+  });
+};
+
+// sweet alert with confirm button and cancel button
+export const sweetAlert = ({ title, message, deleteCar }) => {
+  swal({
+    title: title,
+    text: message,
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      // delete car
+      deleteCar();
+      window.location.reload();
+    } else {
+        swal("Your car is safe!");
+    }
   });
 };
