@@ -7,7 +7,6 @@ import { useState } from "react";
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const path = window.location.pathname.split("/")[1];
-  console.log(path);
 
   return (
     <div className="new">
