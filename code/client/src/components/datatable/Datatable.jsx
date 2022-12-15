@@ -28,7 +28,7 @@ const Datatable = ({ data, title }) => {
       <div className="title">
         <div className="datatableTitle">{title}</div>
         {path === "cars" ? (
-          <Link to="/newCar">
+          <Link to="/cars/new">
             <button className="addButton">Add New Car</button>
           </Link>
         ) : null}
