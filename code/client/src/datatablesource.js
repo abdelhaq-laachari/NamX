@@ -50,24 +50,40 @@ export const userColumns = [
 ];
 
 export const carColumns = [
-  { field: "_id", headerName: "ID", width: 170 },
-  // {
-  //   field: "car",
-  //   headerName: "Car",
-  //   width: 230,
-  //   renderCell: (params) => {
-  //     return (
-  //       <div className="cellWithImg">
-  //         {/* <img className="cellImg" src={params.row.img} alt="avatar" /> */}
-  //         {params.row.car}
-  //       </div>
-  //     );
-  //   },
-  // },
+  { field: "_id", headerName: "ID", width: 130 },
   {
-    field: "model",
-    headerName: "Model",
-    width: 230,
+    field: "name",
+    headerName: "Name",
+    width: 120,
+  },
+  {
+    field: "edition",
+    headerName: "Edition",
+    width: 120,
+  },
+  {
+    field: "horsepower",
+    headerName: "Horse Power",
+    width: 135,
+    renderCell: (params) => {
+      return <div className="cellWithImg">{params.row.horsepower} hp</div>;
+    },
+  },
+  {
+    field: "maxSpeed",
+    headerName: "Max Speed",
+    width: 135,
+    renderCell: (params) => {
+      return <div className="cellWithImg">{params.row.maxSpeed} km/h</div>;
+    },
+  },
+  {
+    field: "acceleration",
+    headerName: "Acceleration",
+    width: 135,
+    renderCell: (params) => {
+      return <div className="cellWithImg">{params.row.acceleration} s</div>;
+    },
   },
 ];
 
@@ -108,4 +124,3 @@ export const orderColumns = [
     },
   },
 ];
-
