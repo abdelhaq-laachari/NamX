@@ -15,7 +15,7 @@ const carSchema = mongoose.Schema(
       required: [true, "Please enter your value"],
     },
     maxSpeed: {
-      type: Number,
+      type: String,
       required: [true, "Please enter your value"],
     },
     acceleration: {

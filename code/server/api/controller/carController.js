@@ -13,8 +13,7 @@ const getCars = asyncHandler(async (req, res) => {
 // @route   POST /api/cars
 // @access  Private
 const addCars = asyncHandler(async (req, res) => {
-  const { name, edition, horsepower, maxSpeed, acceleration, autonomy } =
-    req.body;
+  const { name, edition, horsepower, maxSpeed, acceleration, autonomy } = req.body;
   if (
     !name ||
     !edition ||
@@ -28,10 +27,20 @@ const addCars = asyncHandler(async (req, res) => {
   }
 
   const car = await Car.create({
-    model: req.body,
+    name,
+    edition,
+    horsepower,
+    maxSpeed,
+    acceleration,
+    autonomy,
   });
 
-  res.status(200).json(car);
+  if (car) {
+    res.status(201).json(car);
+  } else {
+    res.status(400);
+    throw new Error("Invalid car data");
+  }
 });
 
 // @desc    Update a car
