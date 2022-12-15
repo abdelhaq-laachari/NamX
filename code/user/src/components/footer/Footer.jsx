@@ -3,7 +3,7 @@ import './Footer.css'
 function Footer() {
   return (
     <div>
-      <footer class="relative bg-[#011D25]  pt-8 pb-6">
+      <footer class="relative bg-[#011D25] self-end   pt-8 pb-6">
         <div class="container text-white  mx-auto px-4">
           <div class="flex flex-wrap text-left flex justify-around  lg:text-left">
             <div class="w-full lg:w-4/12 px-4">
