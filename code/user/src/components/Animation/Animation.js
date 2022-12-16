@@ -46,7 +46,7 @@ function Animation() {
         camera={{ position: [100, 20, 100] }}
         style={{
           width: "100%",
-          height: "900px",
+          height: "1000px",
           // backgroundImage:
           //   "url(https://cdn.pixabay.com/photo/2016/05/22/13/19/background-1408485_960_720.jpg)",
           backgroundrepeat: "no-repeat",
