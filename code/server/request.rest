@@ -1,6 +1,6 @@
 ###
 # login
-http://localhost:6000/api/admin/login
+http://localhost:6000/admin/login
 Content-Type: application/json
 {
     "email": "admin@gmail.com",
@@ -10,7 +10,7 @@ Content-Type: application/json
 
 ###
 # Register Admin
-http://localhost:6000/api/admin/registerAdmin
+http://localhost:6000/admin/registerAdmin
 Content-Type: application/json
 {
      
@@ -20,3 +20,7 @@ Content-Type: application/json
     "password": "admin1234"
   
 }
+###
+# getCar User
+http://localhost:6000/getCar
+
