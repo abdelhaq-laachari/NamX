@@ -11,8 +11,17 @@ const stripe = require("stripe")(Secret_key);
 // @route   POST /newOrder
 // @access  Public
 const newOrder = asyncHandler(async (req, res) => {
-  const { fullName, address, city, phoneNumber, email, quantity, idCar } =
-    req.body;
+  const {
+    fullName,
+    address,
+    city,
+    zipCode,
+    country,
+    phoneNumber,
+    email,
+    quantity,
+    idCar,
+  } = req.body;
 
   const firstName = fullName.split(" ")[0];
 
@@ -20,6 +29,8 @@ const newOrder = asyncHandler(async (req, res) => {
     !fullName ||
     !address ||
     !city ||
+    !zipCode ||
+    !country ||
     !phoneNumber ||
     !email ||
     !quantity ||
@@ -33,11 +44,12 @@ const newOrder = asyncHandler(async (req, res) => {
     fullName,
     address,
     city,
+    zipCode,
+    country,
     phoneNumber,
     email,
   });
   if (client) {
-    payment(email, fullName, address, city);
     const order = await Order.create({
       quantity,
       status: "pending",

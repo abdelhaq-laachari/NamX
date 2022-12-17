@@ -6,6 +6,7 @@ import Voiture_hydrogene from "./pages/voiture-hydrogene/Voiture_hydrogene";
 import NAMXConcept from "./pages/NAMX Concept/NAMXConcept";
 import Footer from "./components/footer/Footer";
 import Order from "./pages/order/Order";
+import SuccessPage from "./pages/success page/SuccessPage";
 function App() {
   return (
     <div>
@@ -21,6 +22,7 @@ function App() {
           <Route path="/NAMXConcept" exact element={<NAMXConcept />} />
           <Route path="/model" exact element={<Model />} />
           <Route path="/order" exact element={<Order />} />
+          <Route path="/success" exact element={<SuccessPage />} />
         </Routes>
       </Router>
       <Footer />

@@ -51,12 +51,11 @@ router.route("/deleteCar/:id").delete(protect, deleteCar);
 // Create route for details crud
 router.route("/getDetails").get(protect, getDetails);
 router.route("/addDetails").post(protect, addDetails);
-router.route("/updateDetail/:id").put(protect, updateDetail);
+router.route("/updateDetail/:id").put(protect, updateDetail); 
 router.route("/deleteDetail/:id").delete(protect, deleteDetail);
 
 
 // Create route for orders
-router.route("/newOrder").post(newOrder);
 router.route("/getOrders").get(protect, getOrders);
 
 // Create route for client

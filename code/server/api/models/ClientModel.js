@@ -12,11 +12,15 @@ const clientSchema = mongoose.Schema(
     },
     city: {
       type: String,
-      required: [true, "Please enter your zip code"],
+      required: [true, "Please enter your City"],
     },
     zipCode: {
       type: Number,
-      required: [true, "Please enter your City"],
+      required: [true, "Please enter your zip code"],
+    },
+    country: {
+      type: String,
+      required: [true, "Please enter your Country"],
     },
     phoneNumber: {
       type: String,

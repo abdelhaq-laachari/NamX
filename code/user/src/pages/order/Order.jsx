@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import Car from "../../assets/image/car.jpg";
+import axios from "axios";
+import { successMessage } from "../../alert";
+import {useNavigate} from 'react-router-dom'
 
 const Order = () => {
   const [formData, setFormData] = useState({
@@ -9,8 +12,9 @@ const Order = () => {
     city: "",
     phoneNumber: "",
     country: "",
-    zipcode: "",
-    quantity: 0,
+    zipCode: "",
+    quantity: "",
+    idCar: "",
   });
 
   const {
@@ -20,17 +24,32 @@ const Order = () => {
     city,
     phoneNumber,
     country,
-    zipcode,
+    zipCode,
     quantity,
+    idCar,
   } = formData;
+
+  const navigate = useNavigate();
+
+  // const token = localStorage.getItem("accessToken");
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const orderFunction = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    
+    // const config = {
+    //   headers: { Authorization: "Bearer " + token },
+    // };
+    try {
+      const res = await axios.post("user/newOrder", formData);
+      // go to success page
+      navigate('/success')
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -48,14 +67,25 @@ const Order = () => {
                   />
                 </div>
 
-                <form className="lg:col-span-2">
+                <form className="lg:col-span-2" onSubmit={orderFunction}>
                   <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                    <div className="md:col-span-5">
+                      <label htmlFor="full_name">Car</label>
+                      <input
+                        type="text"
+                        name="idCar"
+                        id="idCar"
+                        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                        onChange={(e) => onChange(e)}
+                      />
+                    </div>
+
                     <div className="md:col-span-5">
                       <label htmlFor="full_name">Full Name</label>
                       <input
                         type="text"
-                        name="full_name"
-                        id="full_name"
+                        name="fullName"
+                        id="fullName"
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         onChange={(e) => onChange(e)}
                       />
@@ -69,6 +99,7 @@ const Order = () => {
                         id="email"
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         placeholder="email@domain.com"
+                        onChange={(e) => onChange(e)}
                       />
                     </div>
 
@@ -80,6 +111,7 @@ const Order = () => {
                         id="address"
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         placeholder=""
+                        onChange={(e) => onChange(e)}
                       />
                     </div>
 
@@ -91,6 +123,7 @@ const Order = () => {
                         id="city"
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         placeholder=""
+                        onChange={(e) => onChange(e)}
                       />
                     </div>
 
@@ -102,6 +135,7 @@ const Order = () => {
                         id="phoneNumber"
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         placeholder=""
+                        onChange={(e) => onChange(e)}
                       />
                     </div>
 
@@ -111,8 +145,9 @@ const Order = () => {
                         <input
                           name="country"
                           id="country"
-                          placeholder="Country"
                           className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
+                          placeholder="Country"
+                          onChange={(e) => onChange(e)}
                         />
                       </div>
                     </div>
@@ -121,10 +156,11 @@ const Order = () => {
                       <label htmlFor="zipcode">Zipcode</label>
                       <input
                         type="text"
-                        name="zipcode"
-                        id="zipcode"
+                        name="zipCode"
+                        id="zipCode"
                         className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         placeholder=""
+                        onChange={(e) => onChange(e)}
                       />
                     </div>
 
@@ -134,8 +170,9 @@ const Order = () => {
                         <input
                           name="quantity"
                           id="quantity"
-                          placeholder="0"
                           className="px-2 text-center appearance-none outline-none text-gray-800 w-full bg-transparent"
+                          placeholder="0"
+                          onChange={(e) => onChange(e)}
                         />
                       </div>
                     </div>
@@ -144,7 +181,6 @@ const Order = () => {
                       <div className="inline-flex items-end">
                         <button
                           type="submit"
-                          onClick={() => onSubmit()}
                           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         >
                           Submit
