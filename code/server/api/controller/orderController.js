@@ -80,7 +80,7 @@ const newOrder = asyncHandler(async (req, res) => {
 const getOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({})
     .populate("idClient", "fullName")
-    .populate("idCar", "model");
+    .populate("idCar");
   res.status(200).json(orders);
 });
 
