@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import Car from "../../assets/image/car.jpg";
 import axios from "axios";
 import { successMessage } from "../../alert";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Order = () => {
+  const [cars, setCars] = useState();
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -31,7 +34,14 @@ const Order = () => {
 
   const navigate = useNavigate();
 
-  // const token = localStorage.getItem("accessToken");
+  useEffect(() => {
+    const getCar = async () => {
+      const res = await axios.get("user/getCars");
+      setCars(res.data);
+      console.log(res.data);
+    };
+    getCar();
+  }, []);
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,14 +49,9 @@ const Order = () => {
 
   const orderFunction = async (e) => {
     e.preventDefault();
-    
-    // const config = {
-    //   headers: { Authorization: "Bearer " + token },
-    // };
     try {
       const res = await axios.post("user/newOrder", formData);
-      // go to success page
-      navigate('/success')
+      navigate("/success");
     } catch (error) {
       console.log(error);
     }
@@ -69,17 +74,6 @@ const Order = () => {
 
                 <form className="lg:col-span-2" onSubmit={orderFunction}>
                   <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                    <div className="md:col-span-5">
-                      <label htmlFor="full_name">Car</label>
-                      <input
-                        type="text"
-                        name="idCar"
-                        id="idCar"
-                        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                        onChange={(e) => onChange(e)}
-                      />
-                    </div>
-
                     <div className="md:col-span-5">
                       <label htmlFor="full_name">Full Name</label>
                       <input
@@ -165,12 +159,35 @@ const Order = () => {
                     </div>
 
                     <div className="md:col-span-2">
-                      <label htmlFor="soda">How many soda pops?</label>
+                      <label
+                        htmlFor="countries"
+                        className=" appearance-none outline-none text-gray-800 w-full bg-transparent"
+                      >
+                        Select a car
+                      </label>
+                      <select
+                        id="car"
+                        name="idCar"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        onChange={(e) => onChange(e)}
+                      >
+                        {cars?.map((car) => {
+                          return (
+                            <option key={car._id} value={car._id}>
+                              {car.name} {car.edition}{" "}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <label htmlFor="soda">Quantity</label>
                       <div className="h-10 w-28 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
                         <input
                           name="quantity"
                           id="quantity"
-                          className="px-2 text-center appearance-none outline-none text-gray-800 w-full bg-transparent"
+                          className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
                           placeholder="0"
                           onChange={(e) => onChange(e)}
                         />
