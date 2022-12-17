@@ -89,17 +89,34 @@ const getOrders = asyncHandler(async (req, res) => {
 // @access  Private
 // still not working
 const acceptOrder = asyncHandler(async (req, res) => {
-  const model = req.body;
-  if (!model) {
+  // update order status
+  const orderId = req.params.id;
+  const order = await Order.findById(orderId);
+
+  if (!order) {
     res.status(400);
-    throw new Error("Please add a text field");
+    throw new Error("Car not found");
   }
 
-  const car = await Order.create({
-    model: req.body.model,
+  const updatedOrder = await Order.findByIdAndUpdate(orderId, req.body, {
+    new: true,
   });
 
-  res.status(200).json(car);
+  if (updatedOrder) {
+    // update client status
+    const clientId = updatedOrder.idClient;
+    const client = await Client.findById(clientId);
+    if (client) {
+      sendMail({
+        email: client.email,
+        subject: "Order Confirmation",
+        fullName: client.fullName,
+        authEmail,
+        authPassword,
+      });
+      res.send({ message: " The order has been confirmed " });
+    }
+  }
 });
 
 // @desc    Cancel order
