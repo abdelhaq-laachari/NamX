@@ -120,7 +120,7 @@ export const orderColumns = [
     headerName: "Car",
     width: 230,
     renderCell: (params) => {
-      return <div className="cellWithImg">{params.row.idCar.model}</div>;
+      return <div className="cellWithImg">{params.row.idCar.name}</div>;
     },
   },
 ];

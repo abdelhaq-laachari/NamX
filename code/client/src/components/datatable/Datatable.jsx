@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 
 const Datatable = ({ data, title }) => {
   const path = window.location.pathname.split("/")[1];
-  const handleDelete = (_id) => {
-    data.filter((item) => item._id !== _id);
-  };
+  
 
   // add switch statement to handle different paths
   const switchFunction = () => {

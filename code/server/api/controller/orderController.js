@@ -4,6 +4,8 @@ const Client = require("../models/clientModel");
 const { sendMail } = require("emailsender-js");
 const authEmail = process.env.EMAIL;
 const authPassword = process.env.PASS;
+const Secret_key = process.env.Secret_key;
+const stripe = require("stripe")(Secret_key);
 
 // @desc    Create new order by client
 // @route   POST /newOrder
@@ -20,7 +22,7 @@ const newOrder = asyncHandler(async (req, res) => {
     !city ||
     !phoneNumber ||
     !email ||
-    !quantity || 
+    !quantity ||
     !idCar
   ) {
     res.status(400);
@@ -35,6 +37,7 @@ const newOrder = asyncHandler(async (req, res) => {
     email,
   });
   if (client) {
+    payment(email, fullName, address, city);
     const order = await Order.create({
       quantity,
       status: "pending",

@@ -1,4 +1,3 @@
-import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
@@ -6,6 +5,7 @@ import Model from "./pages/model 3d/Model";
 import Voiture_hydrogene from "./pages/voiture-hydrogene/Voiture_hydrogene";
 import NAMXConcept from "./pages/NAMX Concept/NAMXConcept";
 import Footer from "./components/footer/Footer";
+import Order from "./pages/order/Order";
 function App() {
   return (
     <div>
@@ -20,6 +20,7 @@ function App() {
           />
           <Route path="/NAMXConcept" exact element={<NAMXConcept />} />
           <Route path="/model" exact element={<Model />} />
+          <Route path="/order" exact element={<Order />} />
         </Routes>
       </Router>
       <Footer />
