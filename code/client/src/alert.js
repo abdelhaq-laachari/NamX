@@ -54,20 +54,24 @@ export const infoMessage = (info) => {
 };
 
 // sweet alert with confirm button and cancel button
-export const sweetAlert = ({ title, message, deleteCar }) => {
+export const sweetAlert = ({
+  title,
+  acceptMessage,
+  cancelMessage,
+  theFunction,
+}) => {
   swal({
     title: title,
-    text: message,
+    text: acceptMessage,
     icon: "warning",
     buttons: true,
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
       // delete car
-      deleteCar();
-      window.location.reload();
+      theFunction();
     } else {
-        swal("Your car is safe!");
+      swal(cancelMessage);
     }
   });
 };

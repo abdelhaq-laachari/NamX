@@ -13,6 +13,7 @@
       margin: 20px;
       display: flex;
       flex-direction: column;
+      padding-bottom: 1.4rem;
 
       h1 {
         color: lightgray;
@@ -20,7 +21,13 @@
       }
 
       .container {
-        padding: 0 1rem;
+        padding: 0 0.7rem;
+
+        h2{
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
 
         .details {
           display: grid;

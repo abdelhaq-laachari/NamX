@@ -52,7 +52,7 @@ const newOrder = asyncHandler(async (req, res) => {
   if (client) {
     const order = await Order.create({
       quantity,
-      status: "pending",
+      status: "Pending",
       idClient: client._id,
       idCar,
     });
@@ -87,7 +87,6 @@ const getOrders = asyncHandler(async (req, res) => {
 // @desc    Accept order
 // @route   POST /acceptOrder
 // @access  Private
-// still not working
 const acceptOrder = asyncHandler(async (req, res) => {
   // update order status
   const orderId = req.params.id;
@@ -141,18 +140,19 @@ const cancelOrder = asyncHandler(async (req, res) => {
 // @desc    Get single order
 // @route   DELETE /singleOrder/:id
 // @access  Private
-// still not working
 const singleOrder = asyncHandler(async (req, res) => {
-  const car = await Order.findById(req.params.id);
+  const orderId = req.params.id;
 
-  if (!car) {
+  const order = await Order.findById(orderId)
+    .populate("idClient")
+    .populate("idCar");
+
+  if (!order) {
     res.status(400);
-    throw new Error("Car not found");
+    throw new Error("Order not found");
   }
 
-  await Order.remove();
-
-  res.status(200).json({ id: req.params.id });
+  res.send(order);
 });
 
 module.exports = {

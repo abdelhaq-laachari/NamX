@@ -1,38 +1,67 @@
 import "./order.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { successMessage } from "../../alert";
+import { successMessage, sweetAlert } from "../../alert";
 import { config } from "../../getToken";
+import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
 
 const Order = ({ inputs, title }) => {
-  const [file, setFile] = useState("");
-  const [info, setInfo] = useState({});
-  const path = window.location.pathname.split("/")[1];
+  const [data, setData] = useState();
+  const id = localStorage.getItem("orderId");
 
-  const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const formData = {
-        ...info,
-      };
-      const res = await axios.post("/admin/addCars", formData, config);
-      if (res) {
-        successMessage("Car added successfully");
-        // go to cars page after time out
-        setTimeout(() => {
-          window.location.replace("/cars");
-        }, 2000);
+  useEffect(() => {
+    const getOrder = async () => {
+      try {
+        const res = await axios.get(`/admin/singleOrder/${id}`, config);
+        setData(res.data);
+      } catch (err) {
+        console.log(err);
       }
+    };
+    getOrder();
+  }, []);
+
+  const acceptOrder = async () => {
+    try {
+      const res = await axios.put(
+        `/admin/acceptOrder/${id}`,
+        {
+          status: "Accepted",
+        },
+        config
+      );
+      successMessage("Order Accepted");
     } catch (err) {
       console.log(err);
     }
+  };
+  
+  const cancelOrder = async () => {
+    try {
+      const res = await axios.put(
+        `/admin/acceptOrder/${id}`,
+        {
+          status: "Canceled",
+        },
+        config
+      );
+      successMessage("Order Canceled");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const cancel = () => {
+    sweetAlert({
+      title: "Are you sure you want to cancel this order?",
+      acceptMessage: "It's okay you can accept it later",
+      cancelMessage:" No, I want to keep it",
+      theFunction: cancelOrder,
+    });
   };
 
   return (
@@ -45,68 +74,103 @@ const Order = ({ inputs, title }) => {
         </div>
         <div className="bottom">
           <div className="container">
-            <h2>Car Details</h2>
+            <h2>
+              <TimeToLeaveIcon
+                className="icon"
+                style={{
+                  // backgroundColor: "rgba(0, 128, 0, 0.2)",
+                  color: "purple",
+                }}
+              />
+              Car Details
+            </h2>
             <div className="details">
               <div className="detail">
-                <h3>Horse power</h3>
-                <span>500 km</span>
+                <h3>Name</h3>
+                <span>{data?.idCar.name}</span>
               </div>
               <div className="detail">
-                <h3>Horse power</h3>
-                <span>500 km</span>
+                <h3>Edition</h3>
+                <span>{data?.idCar.edition}</span>
               </div>
               <div className="detail">
-                <h3>Horse power</h3>
-                <span>500 km</span>
+                <h3> Horse Power </h3>
+                <span> {data?.idCar.horsepower} HP </span>
               </div>
               <div className="detail">
-                <h3>Horse power</h3>
-                <span>500 km</span>
+                <h3>Acceleration</h3>
+                <span> {data?.idCar.acceleration} s </span>
               </div>
               <div className="detail">
-                <h3>Horse power</h3>
-                <span>500 km</span>
+                <h3>Autonomy</h3>
+                <span>{data?.idCar.autonomy} km</span>
               </div>
               <div className="detail">
-                <h3>Horse power</h3>
-                <span>500 km</span>
+                <h3>Max Speed</h3>
+                <span>{data?.idCar.maxSpeed} Km/h </span>
               </div>
             </div>
           </div>
           <hr />
           <div className="container">
-            <h2>Car Details</h2>
+            <h2>
+              <PersonOutlinedIcon
+                className="icon"
+                style={{
+                  // backgroundColor: "rgba(0, 128, 0, 0.2)",
+                  color: "purple",
+                }}
+              />
+              Client Details
+            </h2>
             <div className="details">
               <div className="detail">
-                <h3>Horse power</h3>
-                <span>500 km</span>
+                <h3>Full Name</h3>
+                <span>{data?.idClient.fullName}</span>
               </div>
               <div className="detail">
-                <h3>Horse power</h3>
-                <span>500 km</span>
+                <h3>Email</h3>
+                <span>{data?.idClient.email}</span>
               </div>
               <div className="detail">
-                <h3>Horse power</h3>
-                <span>500 km</span>
+                <h3>Address</h3>
+                <span>{data?.idClient.address}</span>
               </div>
               <div className="detail">
-                <h3>Horse power</h3>
-                <span>500 km</span>
+                <h3>City</h3>
+                <span>{data?.idClient.city}</span>
               </div>
               <div className="detail">
-                <h3>Horse power</h3>
-                <span>500 km</span>
+                <h3>Phone Number</h3>
+                <span>{data?.idClient.phoneNumber}</span>
               </div>
+            </div>
+          </div>
+          <hr />
+          <div className="container">
+            <h2>
+              <CreditCardIcon
+                className="icon"
+                style={{
+                  // backgroundColor: "rgba(0, 128, 0, 0.2)",
+                  color: "purple",
+                }}
+              />
+              Order Details
+            </h2>
+            <div className="details">
               <div className="detail">
-                <h3>Horse power</h3>
-                <span>500 km</span>
+                <h3>Quantity</h3>
+                <span>{data?.quantity}</span>
               </div>
             </div>
           </div>
           <hr />
           <div className="buttons">
-            <div className="acceptButton">Accept</div>
-            <div className="cancelButton">Cancel</div>
+            <div className="acceptButton" onClick={acceptOrder}>
+              Accept
+            </div>
+            <div className="cancelButton" onClick={cancel}>Cancel</div>
           </div>
         </div>
       </div>

@@ -10,12 +10,19 @@ const viewUser = async (_id) => {
   localStorage.removeItem("orderId");
   localStorage.setItem("userId", _id);
 };
+const viewOrder = async (_id) => {
+  localStorage.removeItem("userId");
+  localStorage.removeItem("carId");
+  localStorage.removeItem("orderId");
+  localStorage.setItem("orderId", _id);
+};
 
 // delete car from table
 const deleteCar = async (_id) => {
   try {
     // axios with header
     const res = await axios.delete(`/admin/deleteCar/${_id}`, config);
+    window.location.reload();
   } catch (error) {
     errorMessage(error.response.data.message);
   }
@@ -25,19 +32,10 @@ const deleteCar = async (_id) => {
 const showAlert = () => {
   sweetAlert({
     title: "Are you sure?",
-    message: "Once deleted, you will not be able to recover this car!",
+    acceptMessage: "Once deleted, you will not be able to recover this car!",
+    cancelMessage: "Your car is safe!",
     deleteCar: () => deleteCar(),
   });
-};
-
-// accept order from table
-const acceptOrder = async (_id) => {
-  try {
-    // axios with header
-    const res = await axios.put(`/admin/acceptOrder/${_id}`, config);
-  } catch (error) {
-    errorMessage(error.response.data.message);
-  }
 };
 
 export const userAction = [
@@ -76,14 +74,7 @@ export const carAction = [
           </Link>
           <div
             className="deleteButton"
-            onClick={() => {
-              sweetAlert({
-                title: "Are you sure?",
-                message:
-                  "Once deleted, you will not be able to recover this car!",
-                deleteCar: () => deleteCar(params.row._id),
-              });
-            }}
+            onClick={showAlert}
           >
             Delete
           </div>
@@ -102,16 +93,14 @@ export const orderAction = [
     renderCell: (params) => {
       return (
         <div className="cellAction">
-          <div
-            className="viewButton"
-            onClick={() => {
-              showAlert();
-            }}
-          >
-            View
-          </div>
-          <div className="acceptButton">Accept</div>
-          <div className="deleteButton">Cancel</div>
+          <Link to="/orders/single" style={{ textDecoration: "none" }}>
+            <div
+              className="viewButton"
+              onClick={() => viewOrder(params.row._id)}
+            >
+              View
+            </div>
+          </Link>
         </div>
       );
     },

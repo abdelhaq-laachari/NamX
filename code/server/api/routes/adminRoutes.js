@@ -18,7 +18,7 @@ const {
 } = require("../controller/carController");
 
 // get function from client controller
-const { createClient, singleClient, getClients } = require("../controller/clientController");
+const { singleClient, getClients } = require("../controller/clientController");
 
 // get function from details controller
 const {
@@ -29,8 +29,11 @@ const {
 } = require("../controller/detailsController");
 
 // get function from order controller
-const { newOrder, getOrders, acceptOrder } = require("../controller/orderController");
-
+const {
+  getOrders,
+  acceptOrder,
+  singleOrder,
+} = require("../controller/orderController");
 
 //  Protect all routes
 const { protect } = require("../middleware/authMiddleware");
@@ -51,12 +54,12 @@ router.route("/deleteCar/:id").delete(protect, deleteCar);
 // Create route for details crud
 router.route("/getDetails").get(protect, getDetails);
 router.route("/addDetails").post(protect, addDetails);
-router.route("/updateDetail/:id").put(protect, updateDetail); 
+router.route("/updateDetail/:id").put(protect, updateDetail);
 router.route("/deleteDetail/:id").delete(protect, deleteDetail);
-
 
 // Create route for orders
 router.route("/getOrders").get(protect, getOrders);
+router.route("/singleOrder/:id").get(protect, singleOrder);
 router.route("/acceptOrder/:id").put(protect, acceptOrder);
 
 // Create route for client
