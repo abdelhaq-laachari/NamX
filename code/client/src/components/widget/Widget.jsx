@@ -6,11 +6,11 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
 
-const Widget = ({ type }) => {
+const Widget = ({ type,amount }) => {
   let data;
 
   //temporary
-  const amount = 100;
+  
   const diff = 20;
 
   switch (type) {

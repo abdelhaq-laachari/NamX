@@ -77,9 +77,16 @@ const deleteCar = asyncHandler(async (req, res) => {
   res.status(200).json({ id: req.params.id });
 });
 
+const totalCars = asyncHandler(async (req, res) => {
+  const total = await Car.countDocuments();
+  res.status(200).json(total);
+});
+
+
 module.exports = {
   getCars,
   addCars,
   updateCar,
   deleteCar,
+  totalCars,
 };

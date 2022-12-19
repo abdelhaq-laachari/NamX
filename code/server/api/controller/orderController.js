@@ -168,10 +168,20 @@ const singleOrder = asyncHandler(async (req, res) => {
   res.send(order);
 });
 
+// @desc    Get total orders
+// @route   GET /totalOrders
+// @access  Private
+
+const totalOrders = asyncHandler(async (req, res) => {
+  const total = await Order.countDocuments();
+  res.status(200).json(total);
+});
+
 module.exports = {
   getOrders,
   acceptOrder,
   cancelOrder,
   singleOrder,
   newOrder,
+  totalOrders,
 };
