@@ -35,11 +35,14 @@ const Order = ({ inputs, title }) => {
         config
       );
       successMessage("Order Accepted");
+      setTimeout(() => {
+        window.location.replace("/orders");
+      }, 2000);
     } catch (err) {
       console.log(err);
     }
   };
-  
+
   const cancelOrder = async () => {
     try {
       const res = await axios.put(
@@ -50,6 +53,27 @@ const Order = ({ inputs, title }) => {
         config
       );
       successMessage("Order Canceled");
+      setTimeout(() => {
+        window.location.replace("/orders");
+      }, 2000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const orderStatus = async (status, message) => {
+    try {
+      const res = await axios.put(
+        `/admin/acceptOrder/${id}`,
+        {
+          status: status,
+        },
+        config
+      );
+      successMessage(message);
+      setTimeout(() => {
+        window.location.replace("/orders");
+      }, 2000);
     } catch (err) {
       console.log(err);
     }
@@ -59,8 +83,9 @@ const Order = ({ inputs, title }) => {
     sweetAlert({
       title: "Are you sure you want to cancel this order?",
       acceptMessage: "It's okay you can accept it later",
-      cancelMessage:" No, I want to keep it",
-      theFunction: cancelOrder,
+      cancelMessage: " No, I want to keep it",
+      theFunction: orderStatus("Canceled", "Order Canceled"),
+      // theFunction: cancelOrder,
     });
   };
 
@@ -78,7 +103,6 @@ const Order = ({ inputs, title }) => {
               <TimeToLeaveIcon
                 className="icon"
                 style={{
-                  // backgroundColor: "rgba(0, 128, 0, 0.2)",
                   color: "purple",
                 }}
               />
@@ -117,7 +141,6 @@ const Order = ({ inputs, title }) => {
               <PersonOutlinedIcon
                 className="icon"
                 style={{
-                  // backgroundColor: "rgba(0, 128, 0, 0.2)",
                   color: "purple",
                 }}
               />
@@ -152,7 +175,6 @@ const Order = ({ inputs, title }) => {
               <CreditCardIcon
                 className="icon"
                 style={{
-                  // backgroundColor: "rgba(0, 128, 0, 0.2)",
                   color: "purple",
                 }}
               />
@@ -167,10 +189,15 @@ const Order = ({ inputs, title }) => {
           </div>
           <hr />
           <div className="buttons">
-            <div className="acceptButton" onClick={acceptOrder}>
+            <div
+              className="acceptButton"
+              onClick={() => orderStatus("Accepted", "Order Accepted")}
+            >
               Accept
             </div>
-            <div className="cancelButton" onClick={cancel}>Cancel</div>
+            <div className="cancelButton" onClick={cancel}>
+              Cancel
+            </div>
           </div>
         </div>
       </div>

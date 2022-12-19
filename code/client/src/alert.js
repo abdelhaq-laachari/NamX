@@ -68,7 +68,6 @@ export const sweetAlert = ({
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      // delete car
       theFunction();
     } else {
       swal(cancelMessage);
