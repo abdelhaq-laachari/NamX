@@ -9,7 +9,7 @@ import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 
-const Order = ({ inputs, title }) => {
+const Order = ({ title }) => {
   const [data, setData] = useState();
   const id = localStorage.getItem("orderId");
 
@@ -46,7 +46,7 @@ const Order = ({ inputs, title }) => {
   const cancelOrder = async () => {
     try {
       const res = await axios.put(
-        `/admin/acceptOrder/${id}`,
+        `/admin/cancelOrder/${id}`,
         {
           status: "Canceled",
         },
@@ -61,31 +61,12 @@ const Order = ({ inputs, title }) => {
     }
   };
 
-  const orderStatus = async (status, message) => {
-    try {
-      const res = await axios.put(
-        `/admin/acceptOrder/${id}`,
-        {
-          status: status,
-        },
-        config
-      );
-      successMessage(message);
-      setTimeout(() => {
-        window.location.replace("/orders");
-      }, 2000);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const cancel = () => {
     sweetAlert({
       title: "Are you sure you want to cancel this order?",
       acceptMessage: "It's okay you can accept it later",
       cancelMessage: " No, I want to keep it",
-      theFunction: orderStatus("Canceled", "Order Canceled"),
-      // theFunction: cancelOrder,
+      theFunction: cancelOrder,
     });
   };
 
@@ -189,10 +170,7 @@ const Order = ({ inputs, title }) => {
           </div>
           <hr />
           <div className="buttons">
-            <div
-              className="acceptButton"
-              onClick={() => orderStatus("Accepted", "Order Accepted")}
-            >
+            <div className="acceptButton" onClick={acceptOrder}>
               Accept
             </div>
             <div className="cancelButton" onClick={cancel}>

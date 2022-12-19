@@ -1,11 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const Order = require("../models/orderModel");
 const Client = require("../models/clientModel");
-const { sendMail } = require("emailsender-js");
+const { confirmationMail, cancelationMail, pendingMail } = require("emailsender-js");
 const authEmail = process.env.EMAIL;
 const authPassword = process.env.PASS;
-const Secret_key = process.env.Secret_key;
-const stripe = require("stripe")(Secret_key);
 
 // @desc    Create new order by client
 // @route   POST /newOrder
@@ -57,7 +55,7 @@ const newOrder = asyncHandler(async (req, res) => {
       idCar,
     });
     if (order) {
-      sendMail({
+      pendingMail({
         email,
         subject: "Order Confirmation 2",
         fullName: firstName,
@@ -106,9 +104,9 @@ const acceptOrder = asyncHandler(async (req, res) => {
     const clientId = updatedOrder.idClient;
     const client = await Client.findById(clientId);
     if (client) {
-      sendMail({
+      confirmationMail({
         email: client.email,
-        subject: "Order Confirmation",
+        subject: "Your order is on its way!",
         fullName: client.fullName,
         authEmail,
         authPassword,
@@ -119,22 +117,37 @@ const acceptOrder = asyncHandler(async (req, res) => {
 });
 
 // @desc    Cancel order
-// @route   PUT /cancelOrder
+// @route   POST /cancelOrder
 // @access  Private
-// still not working
 const cancelOrder = asyncHandler(async (req, res) => {
-  const car = await Order.findById(req.params.id);
+  // update order status
+  const orderId = req.params.id;
+  const order = await Order.findById(orderId);
 
-  if (!car) {
+  if (!order) {
     res.status(400);
     throw new Error("Car not found");
   }
 
-  const updatedCar = await Order.findByIdAndUpdate(req.params.id, req.body, {
+  const updatedOrder = await Order.findByIdAndUpdate(orderId, req.body, {
     new: true,
   });
 
-  res.status(200).json(updatedCar);
+  if (updatedOrder) {
+    // update client status
+    const clientId = updatedOrder.idClient;
+    const client = await Client.findById(clientId);
+    if (client) {
+      cancelationMail({
+        email: client.email,
+        subject: "Cancellation Requested.",
+        fullName: client.fullName,
+        authEmail,
+        authPassword,
+      });
+      res.send({ message: " The order has been canceled " });
+    }
+  }
 });
 
 // @desc    Get single order

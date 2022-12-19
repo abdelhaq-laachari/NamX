@@ -33,6 +33,7 @@ const {
   getOrders,
   acceptOrder,
   singleOrder,
+  cancelOrder,
 } = require("../controller/orderController");
 
 //  Protect all routes
@@ -61,6 +62,7 @@ router.route("/deleteDetail/:id").delete(protect, deleteDetail);
 router.route("/getOrders").get(protect, getOrders);
 router.route("/singleOrder/:id").get(protect, singleOrder);
 router.route("/acceptOrder/:id").put(protect, acceptOrder);
+router.route("/cancelOrder/:id").put(protect, cancelOrder);
 
 // Create route for client
 router.route("/singleClient/:id").get(singleClient);
