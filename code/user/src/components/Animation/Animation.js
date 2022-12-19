@@ -25,12 +25,15 @@ function Animation() {
 
   function changecar() {
     const select = document.getElementById("countries");
+
     // onchange select
     select.value === "jaguar" ? setSce("/jaguar.glb") : setSce("/toyota.glb");
+
     console.log(usesce.toString());
     // afficher name car sur consol:
   console.log("car name jg",cars?.filter(car=> car.name ===select.value ));
     console.log(cars?.map(car=> car.name));
+
     setData(cars?.filter(car=> car.name ===select.value ))
     const car=document.getElementById("car");
     car.style.display="block";
@@ -38,6 +41,14 @@ function Animation() {
   function Model(props) {
     const { scene } = useGLTF(usesce.toString());
     const ref = useRef();
+    // rotation up to 10s after stopping the rotation
+    useFrame((state, delta) => {
+      ref.current.rotation.y += 0.01;
+      // if (state.clock.elapsedTime > 13) {
+      //   ref.current.rotation.y = 0;
+      // }
+    });
+   
     return <primitive object={scene} {...props} ref={ref} />;
   }
 
@@ -46,7 +57,7 @@ function Animation() {
       {/* ajouter selection deux model */}
 
       <section className="">
-        <div class="h-full col-span-4 bg-gradient-to-tr from-indigo-800 to-indigo-500
+        <div class="h-full col-span-4 
          rounded-md flex items-center  ">
           <div className="flex flex-col w-1/3 items-center justify-center  h-screen  ">
             <select

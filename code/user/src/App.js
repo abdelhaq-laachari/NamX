@@ -6,7 +6,7 @@ import Model from "./pages/model 3d/Model";
 import Voiture_hydrogene from "./pages/voiture-hydrogene/Voiture_hydrogene";
 import NAMXConcept from "./pages/NAMX Concept/NAMXConcept";
 import Footer from "./components/footer/Footer";
-
+import Precommande from "./pages/precommande/Precommande"
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
           />
           <Route path="/NAMXConcept" exact element={<NAMXConcept />} />
           <Route path="/model" exact element={<Model />} />
+          <Route path="/precommande" exact element={<Precommande />} />
         </Routes>
       </Router>
       <Footer />

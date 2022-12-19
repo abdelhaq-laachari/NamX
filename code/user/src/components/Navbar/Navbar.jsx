@@ -25,7 +25,8 @@ function Navbar() {
         <li><a href="/voiture_hydrogene" className="text-gray-300 hover:text-indigo-600 text-md ">voiture_hydrogene</a></li>
         <li><a href="/NAMXConcept" className="text-gray-300 hover:text-indigo-600 text-md ">NAMX Concept</a></li>
         <li><a href="/model" className="text-gray-300 hover:text-indigo-600 text-md ">Models</a></li>
-
+        <li><a href="/Precommande" className="text-gray-300 hover:text-indigo-600 text-md ">Precommande</a></li>
+        
         <li><a href="#" className="text-gray-300 hover:text-indigo-600 text-md ">Contact</a></li>
       </ul>
 
