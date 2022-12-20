@@ -7,6 +7,7 @@ import NAMXConcept from "./pages/NAMX Concept/NAMXConcept";
 import Footer from "./components/footer/Footer";
 import Order from "./pages/order/Order";
 import SuccessPage from "./pages/success page/SuccessPage";
+
 function App() {
   return (
     <div>
