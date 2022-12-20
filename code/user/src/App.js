@@ -22,7 +22,7 @@ function App() {
           />
           <Route path="/NAMXConcept" exact element={<NAMXConcept />} />
           <Route path="/model" exact element={<Model />} />
-          <Route path="/precommande" exact element={<Precommande />} />
+          <Route path="/precommande" exact element={<Precommande />} /> 
         </Routes>
       </Router>
       <Footer />
