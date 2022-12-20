@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { errorMessage, sweetAlert } from "./alert";
+import { config } from "./getToken";
 
 // view user
 const viewUser = async (_id) => {
@@ -9,23 +10,33 @@ const viewUser = async (_id) => {
   localStorage.removeItem("orderId");
   localStorage.setItem("userId", _id);
 };
+const viewOrder = async (_id) => {
+  localStorage.removeItem("userId");
+  localStorage.removeItem("carId");
+  localStorage.removeItem("orderId");
+  localStorage.setItem("orderId", _id);
+};
 
 // delete car from table
 const deleteCar = async (_id) => {
   try {
     // axios with header
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    };
     const res = await axios.delete(`/admin/deleteCar/${_id}`, config);
+    window.location.reload();
   } catch (error) {
     errorMessage(error.response.data.message);
   }
 };
 
+// show sweet alert
+const showAlert = () => {
+  sweetAlert({
+    title: "Are you sure?",
+    acceptMessage: "Once deleted, you will not be able to recover this car!",
+    cancelMessage: "Your car is safe!",
+    deleteCar: () => deleteCar(),
+  });
+};
 
 export const userAction = [
   {
@@ -59,23 +70,11 @@ export const carAction = [
       return (
         <div className="cellAction">
           <Link to="/users/id" style={{ textDecoration: "none" }}>
-            <div
-              className="updateButton"
-              // onClick={() => deleteCar(params.row._id)}
-            >
-              Update
-            </div>
+            <div className="updateButton">Update</div>
           </Link>
           <div
             className="deleteButton"
-            // onClick={() => deleteCar(params.row._id)}
-            onClick={()=>{
-              sweetAlert({
-                title: "Are you sure?",
-                message: "Once deleted, you will not be able to recover this car!",
-                deleteCar: () => deleteCar(params.row._id),
-              });
-            }}
+            onClick={showAlert}
           >
             Delete
           </div>
@@ -90,17 +89,18 @@ export const orderAction = [
   {
     field: "action",
     headerName: "Action",
-    width: 200,
+    width: 210,
     renderCell: (params) => {
       return (
         <div className="cellAction">
-          <div className="acceptButton">Accept</div>
-          <div
-            className="deleteButton"
-            //   onClick={() => handleDelete(params.row._id)}
-          >
-            Cancel
-          </div>
+          <Link to="/orders/single" style={{ textDecoration: "none" }}>
+            <div
+              className="viewButton"
+              onClick={() => viewOrder(params.row._id)}
+            >
+              View
+            </div>
+          </Link>
         </div>
       );
     },

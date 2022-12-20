@@ -1,4 +1,3 @@
-import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
@@ -6,7 +5,8 @@ import Model from "./pages/model 3d/Model";
 import Voiture_hydrogene from "./pages/voiture-hydrogene/Voiture_hydrogene";
 import NAMXConcept from "./pages/NAMX Concept/NAMXConcept";
 import Footer from "./components/footer/Footer";
-import Contact from "./pages/contact/Contact";
+import Order from "./pages/order/Order";
+import SuccessPage from "./pages/success page/SuccessPage";
 function App() {
   return (
     <div>
@@ -21,7 +21,8 @@ function App() {
           />
           <Route path="/NAMXConcept" exact element={<NAMXConcept />} />
           <Route path="/model" exact element={<Model />} />
-          <Route path="/contact" exact element={<Contact />} />
+          <Route path="/order" exact element={<Order />} />
+          <Route path="/success" exact element={<SuccessPage />} />
         </Routes>
       </Router>
       <Footer />

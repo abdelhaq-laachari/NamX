@@ -1,5 +1,5 @@
 import React from "react";
-import './Voiture_hydrogene.css'
+import "./Voiture_hydrogene.css";
 function Voiture_hydrogene() {
   return (
     <div>
@@ -74,24 +74,22 @@ function Voiture_hydrogene() {
             </p>
           </div>
           <div class="w-full md:w-1/2 pt-12 md:mt-0">
-          <div class="card">
-          <img
-              className="w-full h-full object-cover rounded-lg shadow-2xl"
-              src="https://www.namx-hydrogen.com/img/fonctionnement-voiture-hydrogene/vehicule-hydrogene-namx.webp"
-              alt="recharge-hydrogene-namx-1920w.webp"
-            />
- <span class="top span"></span>
- <span class="right span"></span>
- <span class="bottom span"></span>
- <span class="left span"></span> 
-</div>
-         
+            <div class="card">
+              <img
+                className="w-full h-full object-cover rounded-lg shadow-2xl"
+                src="https://www.namx-hydrogen.com/img/fonctionnement-voiture-hydrogene/vehicule-hydrogene-namx.webp"
+                alt="recharge-hydrogene-namx-1920w.webp"
+              />
+              <span class="top span"></span>
+              <span class="right span"></span>
+              <span class="bottom span"></span>
+              <span class="left span"></span>
+            </div>
           </div>
         </div>
       </div>
       <section class="bg-[url('https://www.namx-hydrogen.com/img/fonctionnement-voiture-hydrogene/suv-hydrogene-france-1920w.webp')]  h-[46rem] bg-center bg-left ">
-      <div className="bg-gradient-to-r from-black h-screen bg-center bg-cover bg-no-repeat h-[46rem]">
-
+        <div className="bg-gradient-to-r from-black h-screen bg-center bg-cover bg-no-repeat h-[46rem]">
           <div class="container mx-auto px-6 py-20  ">
             <div class="flex flex-col md:flex-row items-center ">
               <div class="w-full md:w-1/2  ">
@@ -133,9 +131,8 @@ function Voiture_hydrogene() {
               </div>
             </div>
           </div>
-      </div>
+        </div>
       </section>
-     
     </div>
   );
 }

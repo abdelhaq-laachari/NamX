@@ -5,12 +5,12 @@ import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUpload
 import { useState } from "react";
 import axios from "axios";
 import {successMessage} from "../../alert";
+import { config } from "../../getToken";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
   const path = window.location.pathname.split("/")[1];
-  const token = localStorage.getItem("accessToken");
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -22,9 +22,7 @@ const New = ({ inputs, title }) => {
       const formData = {
         ...info,
       };
-      const res = await axios.post("/admin/addCars", formData, {
-        headers: { Authorization: "Bearer " + token },
-      });
+      const res = await axios.post("/admin/addCars", formData, config);
       if(res){
         successMessage("Car added successfully");
         // go to cars page after time out

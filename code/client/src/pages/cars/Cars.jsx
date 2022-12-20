@@ -4,6 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import Datatable from "../../components/datatable/Datatable";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { config } from "../../getToken";
 
 const Cars = () => {
   const token = localStorage.getItem("accessToken");
@@ -11,9 +12,7 @@ const Cars = () => {
   // get data from database using axios
   useEffect(() => {
     axios
-      .get("admin/getCars", {
-        headers: { Authorization: "Bearer " + token },
-      })
+      .get("admin/getCars", config)
       .then((res) => {
         console.log(res.data);
         setData(res.data);

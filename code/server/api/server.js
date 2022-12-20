@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 app.use('/admin', require('./routes/adminRoutes'));
-app.use('/', require('./routes/userRoutes'));
+app.use('/user', require('./routes/userRoutes'));
 
 
 app.use(errorHandler)

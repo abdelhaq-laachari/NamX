@@ -118,9 +118,9 @@ export const orderColumns = [
   {
     field: "idCar",
     headerName: "Car",
-    width: 230,
+    width: 170,
     renderCell: (params) => {
-      return <div className="cellWithImg">{params.row.idCar.model}</div>;
+      return <div className="cellWithImg">{params.row.idCar.name} {params.row.idCar.edition} </div>;
     },
   },
 ];

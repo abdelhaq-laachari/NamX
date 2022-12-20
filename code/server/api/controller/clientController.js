@@ -38,8 +38,18 @@ const getClients = asyncHandler(async (req, res) => {
   res.send(clients);
 });
 
+// @desc    Get total clients
+// @route   GET /admin/totalClients
+// @access  Private
+
+const totalClients = asyncHandler(async (req, res) => {
+  const total = await Client.countDocuments();
+  res.status(200).json(total);
+});
+
 module.exports = {
   createClient,
   singleClient,
   getClients,
+  totalClients
 };

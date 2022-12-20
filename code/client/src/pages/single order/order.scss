@@ -1,0 +1,99 @@
+.new {
+  width: 100%;
+  display: flex;
+
+  .newContainer {
+    flex: 6;
+
+    .top,
+    .bottom {
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      padding: 10px;
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 1.4rem;
+
+      h1 {
+        color: lightgray;
+        font-size: 20px;
+      }
+
+      .container {
+        padding: 0 0.7rem;
+
+        h2{
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .details {
+          display: grid;
+          grid-template-columns: 2fr 2fr;
+          grid-column-gap: 2rem;
+          grid-row-gap: 1rem;
+          padding: 1rem;
+        }
+
+        .detail {
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+
+          h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: "Poppins", sans-serif;
+          }
+
+          span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            font-family: "Poppins", sans-serif;
+          }
+        }
+      }
+
+      hr {
+        margin: 1rem 0;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        padding: 0 1rem;
+
+        .acceptButton {
+          padding: 2px 5px;
+          border-radius: 5px;
+          color: green;
+          border: 1px dotted rgba(20, 220, 37, 0.6);
+          cursor: pointer;
+        }
+
+        .acceptButton:hover {
+          color: #fff;
+          background-color: rgba(7, 108, 15, 0.6);
+          transition: all 0.3s ease-in-out;
+        }
+
+        .cancelButton {
+          padding: 2px 5px;
+          border-radius: 5px;
+          color: crimson;
+          border: 1px dotted rgba(220, 20, 60, 0.6);
+          cursor: pointer;
+        }
+
+        .cancelButton:hover {
+          color: #fff;
+          background-color: rgba(184, 8, 43, 0.6);
+          transition: all 0.3s ease-in-out;
+        }
+      }
+    }
+  }
+}

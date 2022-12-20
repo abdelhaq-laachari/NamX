@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Order = require("../models/orderModel");
 const Client = require("../models/clientModel");
-const { sendMail } = require("emailsender-js");
+const { confirmationMail, cancelationMail, pendingMail } = require("emailsender-js");
 const authEmail = process.env.EMAIL;
 const authPassword = process.env.PASS;
 
@@ -9,8 +9,17 @@ const authPassword = process.env.PASS;
 // @route   POST /newOrder
 // @access  Public
 const newOrder = asyncHandler(async (req, res) => {
-  const { fullName, address, city, phoneNumber, email, quantity, idCar } =
-    req.body;
+  const {
+    fullName,
+    address,
+    city,
+    zipCode,
+    country,
+    phoneNumber,
+    email,
+    quantity,
+    idCar,
+  } = req.body;
 
   const firstName = fullName.split(" ")[0];
 
@@ -18,9 +27,11 @@ const newOrder = asyncHandler(async (req, res) => {
     !fullName ||
     !address ||
     !city ||
+    !zipCode ||
+    !country ||
     !phoneNumber ||
     !email ||
-    !quantity || 
+    !quantity ||
     !idCar
   ) {
     res.status(400);
@@ -31,18 +42,20 @@ const newOrder = asyncHandler(async (req, res) => {
     fullName,
     address,
     city,
+    zipCode,
+    country,
     phoneNumber,
     email,
   });
   if (client) {
     const order = await Order.create({
       quantity,
-      status: "pending",
+      status: "Pending",
       idClient: client._id,
       idCar,
     });
     if (order) {
-      sendMail({
+      pendingMail({
         email,
         subject: "Order Confirmation 2",
         fullName: firstName,
@@ -65,62 +78,103 @@ const newOrder = asyncHandler(async (req, res) => {
 const getOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({})
     .populate("idClient", "fullName")
-    .populate("idCar", "model");
+    .populate("idCar");
   res.status(200).json(orders);
 });
 
 // @desc    Accept order
 // @route   POST /acceptOrder
 // @access  Private
-// still not working
 const acceptOrder = asyncHandler(async (req, res) => {
-  const model = req.body;
-  if (!model) {
-    res.status(400);
-    throw new Error("Please add a text field");
-  }
+  // update order status
+  const orderId = req.params.id;
+  const order = await Order.findById(orderId);
 
-  const car = await Order.create({
-    model: req.body.model,
-  });
-
-  res.status(200).json(car);
-});
-
-// @desc    Cancel order
-// @route   PUT /cancelOrder
-// @access  Private
-// still not working
-const cancelOrder = asyncHandler(async (req, res) => {
-  const car = await Order.findById(req.params.id);
-
-  if (!car) {
+  if (!order) {
     res.status(400);
     throw new Error("Car not found");
   }
 
-  const updatedCar = await Order.findByIdAndUpdate(req.params.id, req.body, {
+  const updatedOrder = await Order.findByIdAndUpdate(orderId, req.body, {
     new: true,
   });
 
-  res.status(200).json(updatedCar);
+  if (updatedOrder) {
+    // update client status
+    const clientId = updatedOrder.idClient;
+    const client = await Client.findById(clientId);
+    if (client) {
+      confirmationMail({
+        email: client.email,
+        subject: "Your order is on its way!",
+        fullName: client.fullName,
+        authEmail,
+        authPassword,
+      });
+      res.send({ message: " The order has been confirmed " });
+    }
+  }
+});
+
+// @desc    Cancel order
+// @route   POST /cancelOrder
+// @access  Private
+const cancelOrder = asyncHandler(async (req, res) => {
+  // update order status
+  const orderId = req.params.id;
+  const order = await Order.findById(orderId);
+
+  if (!order) {
+    res.status(400);
+    throw new Error("Car not found");
+  }
+
+  const updatedOrder = await Order.findByIdAndUpdate(orderId, req.body, {
+    new: true,
+  });
+
+  if (updatedOrder) {
+    // update client status
+    const clientId = updatedOrder.idClient;
+    const client = await Client.findById(clientId);
+    if (client) {
+      cancelationMail({
+        email: client.email,
+        subject: "Cancellation Requested.",
+        fullName: client.fullName,
+        authEmail,
+        authPassword,
+      });
+      res.send({ message: " The order has been canceled " });
+    }
+  }
 });
 
 // @desc    Get single order
 // @route   DELETE /singleOrder/:id
 // @access  Private
-// still not working
 const singleOrder = asyncHandler(async (req, res) => {
-  const car = await Order.findById(req.params.id);
+  const orderId = req.params.id;
 
-  if (!car) {
+  const order = await Order.findById(orderId)
+    .populate("idClient")
+    .populate("idCar");
+
+  if (!order) {
     res.status(400);
-    throw new Error("Car not found");
+    throw new Error("Order not found");
   }
 
-  await Order.remove();
+  res.send(order);
+});
 
-  res.status(200).json({ id: req.params.id });
+// @desc    Get total orders
+// @route   GET /totalOrders
+// @access  Private
+
+const totalOrders = asyncHandler(async (req, res) => {
+  const total = await Order.countDocuments();
+  res.status(200).json(total);
 });
 
 module.exports = {
@@ -129,4 +183,5 @@ module.exports = {
   cancelOrder,
   singleOrder,
   newOrder,
+  totalOrders,
 };
